@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Page</title>
+  <link rel="stylesheet" href="" th:href="@{css/style.css}">
+
+</head>
+
+<body id="home">
+  <div class="container">
+    <nav>
+      <img src="images/logo1.png" alt="logo not found">
+      <ul>
+        <li> <a href="#home" >HOME</a></li>
+        <li><a href="#features">FEATURES</a></li>
+        <li>CONTACT</li>
+        <li>ABOUT US</li>
+      </ul>
+      </img>
+      <button id="logintogglebtn">Log In</button>
+    </nav>
+    <div class="formbox active">
+
+      <div class="login-form">
+
+        <h1>Login</h1>
+        <form action="dashboard" method="get">
+          <!-- <select name="" id="">
+            <option value="">Select Role</option>
+            <option value="">Admin</option>
+            <option value="">Employee</option>
+            <option value="">User</option>
+
+
+          </select> -->
+          <input type="text" placeholder="Username">
+          <input type="password" placeholder="Password">
+          <button type="submit">Login</button>
+          <p>Not have any account <span id="createBtn">Create Account</span></p>
+        </form>
+
+      </div>
+      <div class="create-form">
+
+        <h1>Create Account</h1>
+        <form action="" method="get">
+
+          <div class="name">
+            <input type="text" placeholder="First Name">
+            <input type="text" placeholder="Middle Name">
+            <input type="text" placeholder="Middle Name">
+          </div>
+          <!-- <select name="" id="">
+            <option value="">Select Role</option>
+            <option value="">Admin</option>
+            <option value="">Employee</option>
+            <option value="">User</option>
+
+
+          </select> -->
+          <div class="dategenderbox">
+            <label for="">Date of Birth</label>
+            <input type="date"><select name="" id="">
+              <option value="">Select Gender</option>
+              <option value="">Male</option>
+              <option value="">Female</option>
+              <option value="">Others</option>
+
+
+            </select>
+          </div>
+          <input type="number" placeholder="Mobile">
+          <input type="number" placeholder="Aadhar">
+
+          <div class="address">
+            <select id="state" onchange="populateCities()">
+              <option value="" disabled selected>Select State</option>
+              <option value="maharashtra">Maharashtra</option>
+              <option value="gujarat">Gujarat</option>
+              <option value="karnataka">Karnataka</option>
+              <option value="tamilnadu">Tamil Nadu</option>
+              <option value="rajasthan">Rajasthan</option>
+              <option value="punjab">Punjab</option>
+              <option value="kerala">Kerala</option>
+              <option value="uttarpradesh">Uttar Pradesh</option>
+              <option value="madhyapradesh">Madhya Pradesh</option>
+              <option value="westbengal">West Bengal</option>
+            </select>
+
+            <select id="city">
+              <option value="" disabled selected>Select City</option>
+            </select>
+            <input type="text" placeholder="Pincode">
+          </div>
+
+          <input type="text" placeholder="Address">
+
+          <input type="text" placeholder="User Name">
+          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
+
+          <button type="submit">Create</button>
+          <p>Already have an account <span id="loginBtn">Sign in</span></p>
+        </form>
+
+      </div>
+    </div>
+    <section>
+      <div class="box1">
+        <div class="top">
+          <h1>+</h1>
+          <div class="line"></div>
+          <p>Banking Platform</p>
+        </div>
+        <div class="middle">
+          <h3>Online</h3>
+          <h2>Banking</h2>
+          <h1>Platform</h1> <a href="">Get Started</a>
+        </div>
+        <div class="bottom">
+          <div class="reviews">
+            <div class="img"><img src="images/profile.png" alt=""><img src="images/profile.png" alt=""></div> <span>OVER
+              10k+
+              reviews</span>
+          </div>
+          <div class="user">
+            <h3>175+</h3>
+            <p>Users use this Website</p>
+          </div>
+          <div class="transaction">
+            <h3>1000+</h3>
+            <p>Daily Transaction</p>
+          </div>
+        </div>
+      </div>
+      <div class="box2">
+        <img src="images/bankingimg1.png" alt="">
+      </div>
+    </section>
+
+    <div class="features" id="features">
+      <h1>Features</h1>
+      <div class="fe">
+        <div class="febox">
+          <div class="transfer"><img src="images/moneytransfer.png" alt="">
+            <div>
+              <h2>Transfer Money</h2>
+              <p>You can transfer money anywhere and anytime easily from the real time rates.</p>
+            </div>
+          </div>
+          <div class="transfer"><img src="images/moneytransfer.png" alt="">
+            <div>
+              <h2>Safe Transfer</h2>
+              <p>Transfer between account are very safe.This is really unlimited between.</p>
+            </div>
+          </div>
+          <div class="transfer"><img src="images/moneytransfer.png" alt="">
+            <div>
+              <h2>Real Partnership</h2>
+              <p>Access expert advice support from decated team of payment specialist.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const createBtn = document.getElementById("createBtn");
+    createBtn.addEventListener("click", () => {
+      document.querySelector(".login-form").style.display = "none";
+      document.querySelector(".create-form").style.display = "block";
+
+    });
+
+    const loginBtn = document.getElementById("loginBtn");
+    loginBtn.addEventListener("click", () => {
+      document.querySelector(".login-form").style.display = "block";
+      document.querySelector(".create-form").style.display = "none";
+
+    });
+
+    const loginToggleBtn = document.getElementById("logintogglebtn");
+    loginToggleBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      document.querySelector(".formbox").classList.toggle("active");
+
+      // Toggle no-scroll class based on form visibility
+      if (document.querySelector(".formbox").classList.contains("active")) {
+
+        document.body.classList.remove("no-scroll");
+      } else {
+        document.body.classList.add("no-scroll");
+      }
+    });
+
+
+  </script>
+
+  <!-- dropdown state and address -->
+  <script>
+    const stateCityMap = {
+      "maharashtra": ["Mumbai", "Pune", "Nagpur"],
+      "gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+      "karnataka": ["Bengaluru", "Mysuru", "Mangaluru"],
+      "tamilnadu": ["Chennai", "Coimbatore", "Madurai"],
+      "rajasthan": ["Jaipur", "Udaipur", "Jodhpur"],
+      "punjab": ["Amritsar", "Ludhiana", "Chandigarh"],
+      "kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+      "uttarpradesh": ["Lucknow", "Kanpur", "Varanasi"],
+      "madhyapradesh": ["Bhopal", "Indore", "Gwalior"],
+      "westbengal": ["Kolkata", "Howrah", "Durgapur"]
+    };
+
+    function populateCities() {
+      const stateSelect = document.getElementById("state");
+      const citySelect = document.getElementById("city");
+      const selectedState = stateSelect.value;
+
+      // Clear previous city options
+      citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+      // Populate cities based on selected state
+      if (selectedState && stateCityMap[selectedState]) {
+        stateCityMap[selectedState].forEach(city => {
+          const option = document.createElement("option");
+          option.value = city.toLowerCase();
+          option.text = city;
+          citySelect.add(option);
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

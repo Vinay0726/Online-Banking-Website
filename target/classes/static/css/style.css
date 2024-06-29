@@ -1,0 +1,587 @@
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+    /* "Rokkitt" */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+    body {
+      font-family: sans-serif, "Poppins";
+      background-color: #fff;
+      height: 100%;
+      width: 100%;
+
+    }
+
+    /* Disable scrolling */
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      height: 100vh;
+    }
+
+    nav {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      align-items: flex-start;
+      gap: 23%;
+      align-items: center;
+      position: fixed;
+      z-index: 10;
+      top: 0%;
+      background-color: #fff;
+
+
+    }
+
+    nav img {
+      width: 15%;
+      height: 65px;
+      margin-left: 18px;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style: none;
+      gap: 25px;
+      font-weight: 500;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+    }
+
+    nav #logintogglebtn {
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      height: 60%;
+      width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      border-radius: 30px;
+      margin-left: 40px;
+    }
+
+    section {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    section .box1 {
+      width: 40%;
+      height: 100%;
+      margin-top: 6%;
+
+
+    }
+
+    section .box1 .top {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10%;
+      height: 10%;
+      position: relative;
+      margin-top: 13%;
+    }
+
+    section .box1 .top h1 {
+      font-size: 24px;
+      font-weight: 100;
+      height: 25px;
+      width: 25px;
+      background-color: rgba(19, 203, 19, 0.446);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin-left: 11%;
+
+    }
+
+    section .box1 .top p {
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      border-radius: 20px;
+      font-size: 14px;
+      height: 35px;
+      width: 25%;
+      font-family: "Rokkitt";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      z-index: 2;
+      left: 23%;
+      background-color: #fff;
+
+    }
+
+    section .box1 .top .line {
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      height: 10px;
+      border-radius: 15px;
+      width: 8%;
+      position: absolute;
+      z-index: -1;
+      left: 19%;
+    }
+
+    .middle {
+      height: 55%;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10%;
+    }
+
+    .middle h3 {
+      font-size: 90px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      color: rgb(69, 67, 67);
+      margin-top: -10px;
+    }
+
+    .middle h2 {
+      font-size: 95px;
+      font-family: "Roboto Slab";
+      font-weight: 400;
+      color: black;
+      margin-top: -25px;
+    }
+
+    .middle h1 {
+      font-size: 95px;
+      font-family: "Roboto Slab";
+      font-weight: 400;
+      color: black;
+      margin-top: -25px;
+    }
+
+    .middle a {
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      height: 35px;
+      width: 120px;
+      border: 1px solid black;
+      border-radius: 15px;
+      margin-top: 10px;
+      background-color: black;
+      color: #fff;
+    }
+
+    .bottom {
+      height: 15%;
+      width: 80%;
+      margin-left: 10%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      margin-top: -30px;
+    }
+
+    .bottom .reviews {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 120px;
+      gap: 10px;
+
+    }
+
+    .bottom .reviews .img img {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+    }
+
+    .bottom .reviews span {
+      font-size: 10px;
+    }
+
+    .bottom .user {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .user h3 {
+      font-size: 25px;
+    }
+
+    .bottom .user p {
+      font-size: 10px;
+    }
+
+    .bottom .transaction {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .transaction h3 {
+      font-size: 25px;
+    }
+
+    .bottom .transaction p {
+      font-size: 10px;
+    }
+
+    section .box2 {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    section .box2 img {
+      height: 90%;
+      margin-top: -20px;
+    }
+
+    .features {
+      height: 100%;
+      width: 100%;
+      background-image: url(bg.avif);
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    .features h1 {
+      font-size: 80px;
+      font-family: "Poppins";
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    .fe {
+      width: 100%;
+      height: 85%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .febox {
+      width: 80%;
+      height: 45%;
+      border-radius: 20px;
+      background-color: rgb(60, 58, 58);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+
+
+    }
+
+    .febox .transfer {
+      width: 30%;
+      height: 70%;
+      border: 1px solid blanchedalmond;
+      border-radius: 10px;
+      margin-left: 20px;
+      display: flex;
+      gap: 20px;
+
+
+    }
+
+    .febox .transfer img {
+      height: 60px;
+      width: 60px;
+      border-radius: 10px;
+      margin-left: 20px;
+      margin-top: 30px;
+    }
+
+    .febox .transfer div {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin-top: 30px;
+    }
+
+    .febox .transfer div h2 {
+      font-size: 25px;
+      color: white;
+    }
+
+    .febox .transfer div p {
+      font-size: 18px;
+      color: rgb(121, 116, 116);
+      margin-top: 10px;
+    }
+
+    .formbox {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      background-color: transparent;
+      backdrop-filter: blur(3px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .formbox.active {
+      display: none;
+    }
+
+    .login-form {
+      width: 30%;
+      height: 60%;
+      background-color: transparent;
+      backdrop-filter: blur(20px);
+      border-radius: 10px;
+      position: absolute;
+      z-index: 4;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+    }
+
+    .login-form h1 {
+      color: #0b0b0b;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .login-form form {
+      margin-top: 5px;
+      height: 85%;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    .login-form form select {
+      width: 40%;
+      height: 40px;
+      margin-bottom: 5px;
+      margin-top: -10px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid grey;
+
+    }
+
+    .login-form form input {
+      width: 80%;
+      height: 40px;
+      margin: 10px auto;
+      border-radius: 20px;
+      outline: none;
+      padding: 10px;
+      border: 1px solid grey;
+    }
+
+    .login-form form input ::placeholder {
+      margin-left: 30px;
+    }
+
+    .login-form form button {
+      width: 30%;
+      height: 40px;
+      margin: 10px auto;
+      border-radius: 20px;
+      border: none;
+      background-color: black;
+      color: white;
+    }
+
+    .login-form form p {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .login-form form p span {
+      color: #4CAF50;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 3px;
+    }
+
+    /* create account */
+    .create-form {
+      display: none;
+      margin-top: 80px;
+      width: 30%;
+      height: 90%;
+      background-color: transparent;
+      backdrop-filter: blur(20px);
+      border-radius: 10px;
+      position: absolute;
+      z-index: 4;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    }
+
+    .create-form h1 {
+      /* color: #f29a0c; */
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .create-form form {
+
+      height: 90%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      flex-direction: column;
+    }
+
+    .create-form form select {
+      width: 85%;
+      height: 30px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      border-radius: 20px;
+      outline: none;
+
+    }
+
+    .create-form form .name {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      gap: 5px;
+
+    }
+
+    .create-form form .name input {
+      width: 33%;
+      height: 30px;
+      border: 1px solid grey;
+
+    }
+
+    .create-form form .dategenderbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      height: 30px;
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    .create-form form .dategenderbox label {
+      font-size: 14px;
+      font-size: 14px;
+      color: rgb(95, 93, 93);
+
+    }
+
+    .create-form form .dategenderbox select {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .dategenderbox input {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .address {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      gap: 5px;
+
+    }
+
+    .create-form form .address input {
+      width: 35%;
+      height: 30px;
+      border: 1px solid grey;
+      margin-top: 15px;
+
+
+    }
+
+    .create-form form input {
+      width: 85%;
+      height: 30px;
+      margin: 10px auto;
+      border-radius: 20px;
+      outline: none;
+      border: 1px solid grey;
+      padding: 10px;
+    }
+
+    .create-form form button {
+      width: 30%;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 20px;
+      border: none;
+      background-color: black;
+      color: white;
+    }
+
+    .create-form form p {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .create-form form p span {
+      color: #4CAF50;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 3px;
+    }
