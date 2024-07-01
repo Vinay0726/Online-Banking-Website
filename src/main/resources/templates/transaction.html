@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/"
-    data-template="vertical-menu-template-free" xmlns:th="http://www.w3.org/1999/xhtml">
+    data-template="vertical-menu-template-free" xmlns:th="http://www.thymeleaf.org" >
 
 <head>
     <meta charset="utf-8" />
@@ -342,13 +342,13 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td><strong>Pranav Armarkar</strong></td>
-                                            <td>1234567890</td>
-                                            <td>$1,000</td>
-                                            <td>2023-01-15</td>
-                                            <td>Deposit</td>
-                                            <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                        <tr th:each="transaction : ${transactions}">
+                                            <td><strong  th:text="${transaction.fullName}"></strong></td>
+                                            <td th:text="${transaction.accountNumber}"></td>
+                                            <td th:text="${transaction.amount}"></td>
+                                            <td th:text="${transaction.transactionDateTime}"></td>
+                                            <td th:text="${transaction.transactionType}"></td>
+                                            <td><span class="badge bg-label-primary me-1" th:text="${transaction.transactionStatus}"></span></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -364,50 +364,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Raj Warhokar</strong></td>
-                                            <td>2345678901</td>
-                                            <td>$5,000</td>
-                                            <td>2023-02-20</td>
-                                            <td>Withdrawal</td>
-                                            <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Vinay Thaware</strong></td>
-                                            <td>3456789012</td>
-                                            <td>$10,000</td>
-                                            <td>2023-03-25</td>
-                                            <td>Transfer</td>
-                                            <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>

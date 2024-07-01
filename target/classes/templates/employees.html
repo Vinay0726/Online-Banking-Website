@@ -333,7 +333,7 @@
                                             <th>Mobile No</th>
                                             <th>Email</th>
                                             <th>Date-of-birth</th>
-                                            <th>Address</th>
+<!--                                            <th>Address</th>-->
                                             <th>Aadhar no</th>
                                             <th>Created Date</th>
                                             <th>Actions</th>
@@ -341,14 +341,14 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr>
-                                            <td><strong>Pranav Armarkar</strong></td>
-                                            <td>111-222-3333</td>
-                                            <td>pranav@example.com</td>
-                                            <td>1992-05-10</td>
-                                            <td>123 Main St, Springfield</td>
-                                            <td>CIN98765</td>
-                                            <td>2023-03-15</td>
+                                        <tr th:each="employee : ${employees}">
+                                            <td><strong  th:text="${employee.firstName} + ' ' + ${employee.middleName ?: ''} + ' ' + ${employee.lastName}"></strong></td>
+                                            <td th:text="${employee.mobileNumber}"></td>
+                                            <td th:text="${employee.email}"></td>
+                                            <td th:text="${employee.dateOfBirth}"></td>
+<!--                                            <td>123 Main St, Springfield</td>-->
+                                            <td th:text="${employee.aadhaarCard}"></td>
+                                            <td th:text="${employee.createdAt}"></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -364,52 +364,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><strong>Raj Warhoker</strong></td>
-                                            <td>444-555-6666</td>
-                                            <td>raj@example.com</td>
-                                            <td>1988-07-19</td>
-                                            <td>456 Elm St, Metropolis</td>
-                                            <td>CIN54321</td>
-                                            <td>2023-04-20</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Vinay Thaware</strong></td>
-                                            <td>777-888-9999</td>
-                                            <td>vinay@example.com</td>
-                                            <td>1995-12-30</td>
-                                            <td>789 Oak St, Gotham</td>
-                                            <td>CIN13579</td>
-                                            <td>2023-05-25</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -428,6 +383,7 @@
                                         <thead>
 
                                             <tr>
+                                                <th>Name</th>
                                                 <th>UserName</th>
                                                 <th>Password</th>
                                                 <th>Created at</th>
@@ -437,11 +393,13 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
-                                            <tr>
-                                                <td><strong>Raj</strong></td>
-                                                <td>password123</td>
-                                                <td>2023-06-01 08:30:00</td>
-                                                <td>2023-01-01</td>
+
+                                            <tr th:each="employeeCredential : ${employeesCredentials}">
+                                                <td ><strong th:text="${employeeCredential.fullName}"></strong></td>
+                                                <td th:text="${employeeCredential.userName}"></td>
+                                                <td th:text="${employeeCredential.password}"></td>
+                                                <td th:text="${employeeCredential.createdAt}"></td>
+                                                <td th:text="${employeeCredential.updatedAt}"></td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -457,46 +415,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><strong>Vinay</strong></td>
-                                                <td>passw0rd!</td>
-                                                <td>2023-06-02 09:00:00</td>
-                                                <td>2023-02-15</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                            data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>Pranav</strong></td>
-                                                <td>securePass!1</td>
-                                                <td>2023-06-03 07:45:00</td>
-                                                <td>2023-03-30</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                            data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
