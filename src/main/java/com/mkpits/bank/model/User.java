@@ -66,7 +66,6 @@ public class User {
     @Column(name = "updated_by")
     private Integer updatedBy;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Address> addressList;
+
 }
 

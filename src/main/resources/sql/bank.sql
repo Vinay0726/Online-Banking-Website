@@ -222,3 +222,19 @@ CREATE TABLE employee_address (
     updated_by INT,
     FOREIGN KEY (employee_id) REFERENCES employee(id)
 );
+
+--for transfer transaction history
+CREATE TABLE transfertransaction (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    sender_account_number VARCHAR(12) NOT NULL,
+    receiver_id INT NOT NULL,
+    receiver_account_number VARCHAR(12) NOT NULL,
+    transfer_amount DOUBLE NOT NULL,
+    sender_balance DOUBLE NOT NULL,
+    receiver_balance DOUBLE NOT NULL,
+    created_by INT NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_by INT,
+    updated_at DATETIME
+);

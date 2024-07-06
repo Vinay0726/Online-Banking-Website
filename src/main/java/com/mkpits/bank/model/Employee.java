@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,7 +17,6 @@ import java.time.LocalDateTime;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
     @Column(name = "first_name", length = 45, nullable = false)
@@ -54,5 +54,9 @@ public class Employee {
 
     @Column(name = "updated_by")
     private Integer updatedBy;
+
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<EmployeeAddress> employeeAddress;
 
 }

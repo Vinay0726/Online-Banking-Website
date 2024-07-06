@@ -333,7 +333,7 @@
                                             <th>Mobile No</th>
                                             <th>Email</th>
                                             <th>Date-of-birth</th>
-<!--                                            <th>Address</th>-->
+                                            <th>Address</th>
                                             <th>Aadhar no</th>
                                             <th>Created Date</th>
                                             <th>Actions</th>
@@ -346,7 +346,7 @@
                                             <td th:text="${employee.mobileNumber}"></td>
                                             <td th:text="${employee.email}"></td>
                                             <td th:text="${employee.dateOfBirth}"></td>
-<!--                                            <td>123 Main St, Springfield</td>-->
+                                            <td id="addressSize" style th:text="${employee.address} + ', ' + ${employee.city} + ', ' + ${employee.state} + ', ' + ${employee.pinCode}"></td>
                                             <td th:text="${employee.aadhaarCard}"></td>
                                             <td th:text="${employee.createdAt}"></td>
                                             <td>

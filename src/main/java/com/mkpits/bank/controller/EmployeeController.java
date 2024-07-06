@@ -1,9 +1,6 @@
 package com.mkpits.bank.controller;
 
-import com.mkpits.bank.dto.response.EmployeeCredentialResponse;
-import com.mkpits.bank.dto.response.EmployeeResponse;
-import com.mkpits.bank.dto.response.UserCredentialResponse;
-import com.mkpits.bank.dto.response.UserResponse;
+import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.Employee;
 import com.mkpits.bank.service.IEmployeeService;
 import com.mkpits.bank.service.IUserService;
@@ -20,7 +17,7 @@ public class EmployeeController {
     @Autowired
     IEmployeeService employeeService;
     @GetMapping("/employees")
-    public String getUsers(Model model) {
+    public String getEmployees(Model model) {
         List<EmployeeResponse> employeeResponseDtoList = employeeService.getAllEmployees();
         List<EmployeeCredentialResponse> employeeCredentialResponses=employeeService.getAllEmployeesCredentials();
         model.addAttribute("employees", employeeResponseDtoList);
