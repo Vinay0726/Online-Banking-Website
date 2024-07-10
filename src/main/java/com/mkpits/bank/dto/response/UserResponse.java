@@ -9,6 +9,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -24,7 +25,7 @@ public class UserResponse {
     private String mobileNumber;
     private String email;
     private String gender;
-    private LocalDate dateOfBirth;
+    private String dateOfBirth;
     private String cin;
     private String aadhaarCard;
     private LocalDateTime createdAt;

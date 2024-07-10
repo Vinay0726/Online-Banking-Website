@@ -19,8 +19,11 @@ public class EmployeeCredential {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "employee_id")
+    private Integer employeeId;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id", insertable = false, updatable = false)
     private Employee employee;
 
     @Column(name = "user_name", length = 10, nullable = false)

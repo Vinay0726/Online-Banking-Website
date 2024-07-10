@@ -18,11 +18,15 @@ public class EmployeeAddress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "employee_id", insertable = false, updatable = false)
+
+
+
+    @Column(name = "employee_id")
     private Integer employeeId;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "employee_id", insertable = false, updatable = false)
     private Employee employee;
 
     @Column(name = "address", columnDefinition = "TEXT")

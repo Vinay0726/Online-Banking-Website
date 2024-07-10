@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -22,6 +23,7 @@ public class Account {
 
     @Column(name = "user_id", insertable = false, updatable = false)
     private Integer userId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     private User user;
@@ -67,4 +69,12 @@ public class Account {
             this.userId = user.getId();
         }
     }
+
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
+
+
 }

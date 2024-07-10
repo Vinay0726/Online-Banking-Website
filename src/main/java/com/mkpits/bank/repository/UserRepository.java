@@ -1,7 +1,20 @@
 package com.mkpits.bank.repository;
 
+import com.mkpits.bank.model.Employee;
 import com.mkpits.bank.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
+@Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
+
+    @Query("SELECT CAST(u.createdAt AS date) AS date, COUNT(u) AS userCount " +
+            "FROM User u GROUP BY CAST(u.createdAt AS date) ORDER BY CAST(u.createdAt AS date)")
+    List<Object[]> findDailyUserData();
+
+
 }

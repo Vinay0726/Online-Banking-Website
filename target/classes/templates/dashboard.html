@@ -24,6 +24,8 @@
     href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
     rel="stylesheet" />
 
+<!--  for graph  chart-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Icons. Uncomment required icon fonts -->
   <link rel="stylesheet" href="" th:href="@{assets/vendor/fonts/boxicons.css}" />
 
@@ -132,10 +134,17 @@
           <li class="menu-header small text-uppercase"><span class="menu-header-text">User Management</span></li>
           <!-- Tables -->
           <li class="menu-item">
+            <a href="admin/adduser" class="menu-link">
+              <i class='menu-icon bx bxs-user-plus'></i>
+              <div data-i18n="Tables">Add User</div>
+            </a>
+          </li>
+          <li class="menu-item">
             <a href="users" class="menu-link">
               <i class="menu-icon tf-icons bx bx-table"></i>
               <div data-i18n="Tables">Users</div>
             </a>
+            </li>
           <li class="menu-item">
             <a href="accounts" class="menu-link">
               <i class="menu-icon tf-icons bx bx-table"></i>
@@ -158,6 +167,12 @@
             <!-- Employee  -->
              <li class="menu-header small text-uppercase"><span class="menu-header-text">Employee Management</span></li>
           <!-- Tables -->
+           <li class="menu-item">
+                        <a href="admin/addemployee" class="menu-link">
+                            <i class='menu-icon bx bxs-user-plus'></i>
+                            <div data-i18n="Tables">Add Employee</div>
+                        </a>
+                    </li>
           <li class="menu-item">
             <a href="employees" class="menu-link">
               <i class="menu-icon tf-icons bx bx-table"></i>
@@ -359,9 +374,9 @@
                           </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Users</span>
-                        <h3 class="card-title mb-2">1050</h3>
+                        <h3 class="card-title mb-2" th:text="${totalUsers}">0</h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                          +72.80%</small>
+                          +12.80%</small>
                       </div>
                     </div>
                   </div>
@@ -385,7 +400,7 @@
                           </div>
                         </div>
                         <span>Accounts</span>
-                        <h3 class="card-title text-nowrap mb-1">1500</h3>
+                        <h3 class="card-title text-nowrap mb-1" th:text="${totalAccounts}">00</h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                           +28.42%</small>
                       </div>
@@ -400,6 +415,14 @@
                     <div class="col-md-8">
                       <h5 class="card-header m-0 me-2 pb-3">Total Users</h5>
                       <!--                                        <div id="totalRevenueChart" class="px-2"></div>-->
+                      <div>
+                        <canvas id="dailyUsersChart"></canvas>
+                      </div>
+                      <script th:inline="javascript">
+                        /*<![CDATA[*/
+                        const dailyUserData = /*[[${dailyUserDataJson}]]*/ '[]';
+                        /*]]>*/
+                      </script>
                     </div>
                     <div class="col-md-4">
                       <div class="card-body">
@@ -467,7 +490,7 @@
                           </div>
                         </div>
                         <span class="d-block mb-1">Open Account</span>
-                        <h3 class="card-title text-nowrap mb-2">150</h3>
+                        <h3 class="card-title text-nowrap mb-2" th:text="${todayAccounts}"></h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                           10.82%</small>
                       </div>
@@ -493,7 +516,7 @@
                           </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Transactions</span>
-                        <h3 class="card-title mb-2">$14,857</h3>
+                        <h3 class="card-title mb-2" th:text="${totalTransactions}">0</h3>
                         <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
                           +28.14%</small>
                       </div>
@@ -741,9 +764,12 @@
   <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
   <script src="../assets/vendor/js/menu.js"></script>
+
+  <script th:src="@{/js/userschart.js}"></script>
   <!-- endbuild -->
 
   <!-- Vendors JS -->
+
   <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
   <!-- Main JS -->

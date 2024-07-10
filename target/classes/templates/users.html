@@ -133,6 +133,12 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">User Managment</span>
                     </li>
                     <!-- Tables -->
+                     <li class="menu-item">
+              <a href="admin/adduser" class="menu-link">
+                <i class='menu-icon bx bxs-user-plus'></i>
+                <div data-i18n="Tables">Add User</div>
+              </a>
+            </li>
                     <li class="menu-item">
                         <a href="users" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
@@ -161,6 +167,12 @@
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Employee
                             Management</span></li>
                     <!-- Tables -->
+                     <li class="menu-item">
+                        <a href="admin/addemployee" class="menu-link">
+                            <i class='menu-icon bx bxs-user-plus'></i>
+                            <div data-i18n="Tables">Add Employee</div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="employees" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-table"></i>
@@ -366,9 +378,9 @@
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
+                                                        <a class="dropdown-item" href="javascript:void(0);" th:href="@{/admin/edituser/{id}(id=${user.id})}"><i
                                                                 class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
+                                                        <a class="dropdown-item" href="javascript:void(0);" th:href="@{/admin/deleteuser/{id}(id=${user.id})}"><i
                                                                 class="bx bx-trash me-1"></i> Delete</a>
                                                     </div>
                                                 </div>
@@ -422,7 +434,7 @@
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="javascript:void(0);"><i
                                                                     class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            <a class="dropdown-item" href="javascript:void(0);" ><i
                                                                     class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>

@@ -18,8 +18,11 @@ public class UserCredential {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column(name = "user_id")
+    private Integer userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @Column(name = "user_name", length = 10, nullable = false)
