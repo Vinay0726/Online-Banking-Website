@@ -18,19 +18,7 @@ CREATE TABLE user (
     updated_by INT
 );
 
-CREATE TABLE address (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    address TEXT,
-    pincode VARCHAR(7) NOT NULL,
-    city_id INT NOT NULL,
-    district_id INT NOT NULL,
-    state_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (city_id) REFERENCES city(id),
-    FOREIGN KEY (district_id) REFERENCES district(id),
-    FOREIGN KEY (state_id) REFERENCES state(id)
-);
+
 -- create user credentials
 CREATE TABLE user_credential (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -66,6 +54,23 @@ CREATE TABLE account (
     FOREIGN KEY (branch_id) REFERENCES branch(id)
 );
 
+CREATE TABLE address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    address TEXT,
+    pincode VARCHAR(7) NOT NULL,
+    city_id INT NOT NULL,
+    district_id INT NOT NULL,
+    state_id INT NOT NULL,
+    created_at DATETIME NOT NULL,
+    created_by INT NOT NULL,
+    updated_at DATETIME,
+    updated_by INT,
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (city_id) REFERENCES city(id),
+    FOREIGN KEY (district_id) REFERENCES district(id),
+    FOREIGN KEY (state_id) REFERENCES state(id)
+);
 CREATE TABLE state (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
@@ -74,8 +79,8 @@ CREATE TABLE state (
     created_by INT NOT NULL,
     updated_at DATETIME,
     updated_by INT
-);
 
+);
 CREATE TABLE district (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
@@ -87,7 +92,6 @@ CREATE TABLE district (
     updated_by INT,
     FOREIGN KEY (state_id) REFERENCES state(id)
 );
-
 CREATE TABLE city (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
@@ -99,7 +103,6 @@ CREATE TABLE city (
     updated_by INT,
     FOREIGN KEY (district_id) REFERENCES district(id)
 );
-
 CREATE TABLE branch (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(20) NOT NULL,

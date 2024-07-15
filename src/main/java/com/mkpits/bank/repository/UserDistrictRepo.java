@@ -9,4 +9,7 @@ import java.util.Optional;
 @Repository
 public interface UserDistrictRepo extends JpaRepository<UserDistrict,Integer> {
     Optional<UserDistrict> findByName(String name);
+
+
+
 }

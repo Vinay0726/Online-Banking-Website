@@ -6,6 +6,7 @@ import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public List<UserCredentialResponse> getAllUsersCredentials();
 
 public List<TransactionResponse> getAllTransactions();
 
-public List<AccountResponse> getAccountsByUserId(Integer userId);
+public List<AccountResponse> getAccountByUserId(Integer userId);
 
 //for Register  User
  public UserRequest registerUsers(UserRequest userRequest);
@@ -42,5 +43,12 @@ public List<AccountResponse> getAccountsByUserId(Integer userId);
    //get user by id
     Optional<User> getUserById(Long id);
 
+//update user
+    void updateUserData(Long userId, UserRequest userRequest);
 
+    //get Total balance of accounts
+    BigDecimal getTotalBalance();
+
+    //get last 5 users
+    List<User> getLast5Users();
 }

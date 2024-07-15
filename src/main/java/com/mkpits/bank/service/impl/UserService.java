@@ -99,8 +99,8 @@ UserDistrictRepo districtRepository;
     }
 
     @Override
-    public List<AccountResponse> getAccountsByUserId(Integer userId) {
-        List<Account> accounts = (List<Account>) accountRepository.findByUserId(userId);
+    public List<AccountResponse> getAccountByUserId(Integer userId) {
+        Optional<Account> accounts = (accountRepository.findByUserId(userId));
         return accounts.stream().map(this::convertAccountModelToAccountDtoGetResponse).collect(Collectors.toList());
 
     }
@@ -108,7 +108,7 @@ UserDistrictRepo districtRepository;
     @Override
     @Transactional
     public UserRequest registerUsers(UserRequest userRequest) {
-    User user=userRequest.getUser();
+        User user=userRequest.getUser();
         user.setCin(generateCIN());
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy(1);
@@ -151,38 +151,142 @@ UserDistrictRepo districtRepository;
         userCredentialRepository.save(userCredential);
 
 
-// Set user in address and save address
-        UserState userState=userRequest.getState();
-        userState.setCode(5265);
 
+
+// Set user in address and save address
+        UserState userState = userRequest.getState();
+        userState.setCode(Integer.parseInt(convertStateNameToCode(userState.getName())));
+        userState.setCreatedBy(1);
+        userState.setCreatedAt(LocalDateTime.now());
+        userState.setUpdatedBy(1);
+        userState.setUpdatedAt(LocalDateTime.now());
         stateRepository.save(userState);
 
-        UserDistrict userDistrict=userRequest.getDistrict();
-        userDistrict.setCode(1123);
+        UserDistrict userDistrict = userRequest.getDistrict();
+        userDistrict.setCode(Integer.parseInt(convertDistrictNameToCode(userDistrict.getName(), userState.getName(), userRequest.getCity().getName())));
+
         userDistrict.setStateId(userState.getId());
+        userDistrict.setCreatedBy(1);
+        userDistrict.setCreatedAt(LocalDateTime.now());
+        userDistrict.setUpdatedBy(1);
+        userDistrict.setUpdatedAt(LocalDateTime.now());
         districtRepository.save(userDistrict);
 
-        UserCity userCity=userRequest.getCity();
-        userCity.setCode(5353);
+        UserCity userCity = userRequest.getCity();
+        userCity.setCode(Integer.parseInt(convertCityNameToCode(userCity.getName(), userState.getName())));
         userCity.setDistrictId(userDistrict.getId());
+        userCity.setCreatedBy(1);
+        userCity.setCreatedAt(LocalDateTime.now());
+        userCity.setUpdatedBy(1);
+        userCity.setUpdatedAt(LocalDateTime.now());
         cityRepository.save(userCity);
 
-
-        UserAddress userAddress=userRequest.getAddress();
-        userAddress.setUserId(user.getId());
+        UserAddress userAddress = userRequest.getAddress();
+        userAddress.setUserId(user.getId());  // Corrected to set user ID
         userAddress.setUser(user);
-        userAddress.setCityId(userCity.getId());
-        userAddress.setDistrictId(userDistrict.getId());
+        userAddress.setCityId(userCity.getId());  // Corrected to set city ID
+        userAddress.setDistrictId(userDistrict.getId());  // Corrected to set district ID
         userAddress.setStateId(userState.getId());
-
-
+        userAddress.setCreatedBy(1);
+        userAddress.setCreatedAt(LocalDateTime.now());
+        userAddress.setUpdatedBy(1);
+        userAddress.setUpdatedAt(LocalDateTime.now());
         addressRepository.save(userAddress);
-
-
         return userRequest;
-
-
     }
+    @Override
+    public void updateUserData(Long userId, UserRequest userRequest) {
+
+        Optional<User> userOptional = userRepository.findById(Math.toIntExact(userId));
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setFirstName(userRequest.getUser().getFirstName());
+            user.setMiddleName(userRequest.getUser().getMiddleName());
+            user.setLastName(userRequest.getUser().getLastName());
+            user.setMobileNumber(userRequest.getUser().getMobileNumber());
+            user.setEmail(userRequest.getUser().getEmail());
+            user.setGender(userRequest.getUser().getGender());
+            user.setDateOfBirth(userRequest.getUser().getDateOfBirth());
+            user.setAdhaarCard(userRequest.getUser().getAdhaarCard());
+            user.setUpdatedAt(LocalDateTime.now());
+            user.setUpdatedBy(1);
+            userRepository.save(user);
+        }
+
+        Optional<UserCredential> userCredentialOptional = userCredentialRepository.findByUserId(Math.toIntExact(userId));
+        if (userCredentialOptional.isPresent()) {
+            UserCredential userCredential = userCredentialOptional.get();
+            userCredential.setUserName(userRequest.getUserCredential().getUserName());
+            userCredential.setPassword(userRequest.getUserCredential().getPassword());
+            userCredential.setUpdatedAt(LocalDateTime.now());
+            userCredential.setUpdatedBy(1);
+            userCredentialRepository.save(userCredential);
+        }
+
+        Optional<Account> accountOptional = accountRepository.findByUserId(Math.toIntExact(userId));
+        if (accountOptional.isPresent()) {
+            Account account = accountOptional.get();
+            account.setAccountType(userRequest.getAccount().getAccountType());
+            account.setBalance(userRequest.getAccount().getBalance());
+            account.setUpdatedAt(LocalDateTime.now());
+            account.setUpdatedBy(1);
+            accountRepository.save(account);
+        }
+
+        // Update Address
+        Optional<UserAddress> userAddressOptional = addressRepository.findByUserId(Math.toIntExact(userId));
+        if (userAddressOptional.isPresent()) {
+            UserAddress userAddress = userAddressOptional.get();
+            userAddress.setAddress(userRequest.getAddress().getAddress());
+            userAddress.setPincode(userRequest.getAddress().getPincode());
+            userAddress.setUpdatedAt(LocalDateTime.now());
+            userAddress.setUpdatedBy(1);
+
+            // Update State
+            if (userRequest.getAddress().getState() != null) {
+                if (userRequest.getAddress().getState().getId() != null) {
+                    Optional<UserState> userStateOptional = stateRepository.findById(userRequest.getAddress().getState().getId());
+                    userStateOptional.ifPresent(userState -> {
+                        userState.setName(userRequest.getAddress().getState().getName());
+                        userState.setUpdatedAt(LocalDateTime.now());
+                        userState.setUpdatedBy(1);
+                        stateRepository.save(userState);
+                    });
+                }
+            }
+
+            // Update City
+            if (userRequest.getAddress().getCity() != null) {
+                if (userRequest.getAddress().getCity().getId() != null) {
+                    Optional<UserCity> userCityOptional = cityRepository.findById(userRequest.getAddress().getCity().getId());
+                    userCityOptional.ifPresent(userCity -> {
+                        userCity.setName(userRequest.getAddress().getCity().getName());
+                        userCity.setUpdatedAt(LocalDateTime.now());
+                        userCity.setUpdatedBy(1);
+                        cityRepository.save(userCity);
+                    });
+                }
+            }
+
+            // Update District
+            if (userRequest.getAddress().getDistrict() != null) {
+                if (userRequest.getAddress().getDistrict().getId() != null) {
+                    Optional<UserDistrict> userDistrictOptional = districtRepository.findById(userRequest.getAddress().getDistrict().getId());
+                    userDistrictOptional.ifPresent(userDistrict -> {
+                        userDistrict.setName(userRequest.getAddress().getDistrict().getName());
+                        userDistrict.setUpdatedAt(LocalDateTime.now());
+                        userDistrict.setUpdatedBy(1);
+                        districtRepository.save(userDistrict);
+                    });
+                }
+            }
+
+            addressRepository.save(userAddress);
+        }
+    }
+
+
+
 
     public String generateAccountNumber(UserRequest userRequest) {
 
@@ -444,7 +548,20 @@ UserDistrictRepo districtRepository;
 
         return dailyUserData;
     }
-//delete user by id
+
+    //get total balance of accounts
+    @Override
+    public BigDecimal getTotalBalance() {
+        return accountRepository.findTotalBalance();
+    }
+
+    //last 5 users
+    @Override
+    public List<User> getLast5Users() {
+        return userRepository.findTop5ByOrderByUsersDateTimeDesc();
+    }
+
+    //delete user by id
     @Override
     public void deleteUserById(Long id) {
 
@@ -456,6 +573,8 @@ UserDistrictRepo districtRepository;
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(Math.toIntExact(id));
     }
+
+
 
 
     //    automatically set rate of interest using accountType

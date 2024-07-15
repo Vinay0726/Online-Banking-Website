@@ -18,17 +18,17 @@ public class AccountController {
     @Autowired
     IUserService userService;
 
-    @GetMapping("/accounts")
+    @GetMapping("/admin/accounts")
     public String getAccounts(Model model) {
 
         List<AccountResponse> accountList= userService.getAllAccounts();
         model.addAttribute("accounts",accountList);
-        return "accounts";
+        return "admin/accounts";
     }
-    @GetMapping("/accounts/{userId}")
+    @GetMapping("/admin/accounts/{userId}")
     public String getAccountsByUserId(@PathVariable Integer userId, Model model) {
-        List<AccountResponse> accountResponseList = userService.getAccountsByUserId(userId);
+        List<AccountResponse> accountResponseList = userService.getAccountByUserId(userId);
         model.addAttribute("accounts", accountResponseList);
-        return "total-accounts";
+        return "admin/total-accounts";
     }
 }

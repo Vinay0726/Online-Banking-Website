@@ -13,38 +13,35 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "city")
 public class UserCity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", length = 20, nullable = false)
+    @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(name = "code", nullable = false)
+    @Column(nullable = false)
     private Integer code;
 
-    @Column(name = "district_id")
+    @Column(name="district_id")
     private Integer districtId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "district_id", insertable = false, updatable = false)
     private UserDistrict district;
+
+
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "created_by", nullable = false)
+    @Column(name = "created_by",nullable = false)
     private Integer createdBy;
-
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
     @Column(name = "updated_by")
     private Integer updatedBy;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)  // Assuming user_id is the foreign key column in UserCity table
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", nullable = false)  // Assuming user_id is the foreign key column in UserCity table
+//    private User user;
 }

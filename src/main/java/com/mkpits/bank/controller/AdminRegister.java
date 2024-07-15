@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminRegister {
 
-    @GetMapping("/auth-register-basic")
+    @GetMapping("/admin/auth-register-basic")
 
     public String adminRegister(){
-        return "auth-register-basic";
+        return "admin/auth-register-basic";
     }
 }

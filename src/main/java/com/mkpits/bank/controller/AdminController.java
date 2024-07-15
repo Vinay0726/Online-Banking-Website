@@ -55,19 +55,64 @@ public class AdminController {
     @PostMapping ("/admin/adduser")
    public String registerUsers(@ModelAttribute UserRequest userRequest, Model model)  {
 
-      UserRequest userRequest1= userService.registerUsers(userRequest);
-      model.addAttribute("message","user registered successfully");
-     return "redirect:/users";
+        try {
+            UserRequest registeredUser = userService.registerUsers(userRequest);
+            model.addAttribute("message", "User registered successfully");
+            return "redirect:admin/users";
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to register user: " + e.getMessage());
+            // You might want to add userRequest or other necessary attributes back to the model
+            return "admin/adduser"; // Assuming "adduser" is your form view name
+        }
     }
 
+//    Update User
+
+    @GetMapping("/admin/updateuser/{id}")
+    public String getUpdateUserForm(@PathVariable("id") Long id, Model model) {
+        Optional<User> userOptional = userRepository.findById(Math.toIntExact(id));
+
+        System.out.println(userOptional);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            UserCredential userCredential = userCredentialRepository.findByUserId(user.getId()).orElse(new UserCredential());
+            Account account = accountRepository.findByUserId(user.getId()).orElse(new Account());
+            UserAddress userAddress = addressRepository.findByUserId(user.getId()).orElse(new UserAddress());
+            UserState userState = stateRepository.findById(userAddress.getStateId()).orElse(new UserState());
+            UserDistrict userDistrict = districtRepository.findById(userAddress.getDistrictId()).orElse(new UserDistrict());
+            UserCity userCity = cityRepository.findById(userAddress.getCityId()).orElse(new UserCity());
 
 
+            UserRequest userRequest = new UserRequest();
+            userRequest.setUser(user);
+            userRequest.setUserCredential(userCredential);
+            userRequest.setAccount(account);
+            userRequest.setAddress(userAddress);
+            userRequest.setState(userState);
+            userRequest.setDistrict(userDistrict);
+            userRequest.setCity(userCity);
 
+            model.addAttribute("userRequest", userRequest);
+            model.addAttribute("userId", id);
+            return "admin/edituser";
+        } else {
+            // Handle the case where the user is not found
+            return "redirect:admin/users";
+        }
+    }
+    @PostMapping("/admin/updateuser")
+    public String updateUser(@ModelAttribute UserRequest userRequest, @RequestParam Long userId, Model model) {
+
+        userService.updateUserData(userId,userRequest);
+
+        model.addAttribute("message", "User updated successfully");
+        return "redirect:admin/users";
+    }
     //Delete user by id
     @GetMapping("/admin/deleteuser/{id}")
       public String deleteUser(@PathVariable("id") Long id){
        userService.deleteUserById(id) ;
-       return "redirect:/users";
+       return "redirect:admin/users";
     }
 
 
@@ -84,7 +129,7 @@ public class AdminController {
     public String registerEmployees(@ModelAttribute("employeeRequest") EmployeeRequest employeeRequest, Model model) {
         employeeService.registerEmployees(employeeRequest);
         model.addAttribute("message", "Employee registered successfully");
-        return "redirect:/employees";
+        return "redirect:admin/employees";
     }
 
 
@@ -120,7 +165,7 @@ public class AdminController {
             return "admin/editemployee";
         } else {
             // Handle the case where the employee is not found
-            return "redirect:/employees";
+            return "redirect:admin/employees";
         }
     }
     @PostMapping("/admin/updateemployee")
@@ -129,7 +174,7 @@ public class AdminController {
         employeeService.updateEmployeeData(employeeId,employeeRequest);
 
             model.addAttribute("message", "Employee updated successfully");
-        return "redirect:/employees";
+        return "redirect:admin/employees";
     }
 
 
@@ -137,6 +182,6 @@ public class AdminController {
     @GetMapping("/admin/deleteemployee/{id}")
     public String deleteEmployee(@PathVariable("id") Long id){
         employeeService.deleteEmployeeById(id) ;
-        return "redirect:/employees";
+        return "redirect:admin/employees";
     }
 }

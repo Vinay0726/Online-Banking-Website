@@ -21,13 +21,13 @@ public class UserController {
     @Autowired
     IUserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/admin/users")
     public String getUsers(Model model) {
         List<UserResponse> userResponseDtoList = userService.getAllUsers();
         List<UserCredentialResponse> userCredentialResponses = userService.getAllUsersCredentials();
         model.addAttribute("users", userResponseDtoList);
         model.addAttribute("usersCredentials", userCredentialResponses);
-        return "users";
+        return "admin/users";
     }
 
 

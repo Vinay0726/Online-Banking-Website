@@ -21,11 +21,11 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
+    @Column(name = "user_id")
     private Integer userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @Column(name = "account_type")
@@ -61,7 +61,6 @@ public class Account {
     @Column(name = "updated_by")
     private Integer updatedBy;
 
-
     @PrePersist
     @PreUpdate
     private void setUserId() {
@@ -75,6 +74,4 @@ public class Account {
             this.createdAt = LocalDateTime.now();
         }
     }
-
-
 }

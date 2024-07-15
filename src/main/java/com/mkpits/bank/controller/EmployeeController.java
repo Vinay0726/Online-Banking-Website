@@ -16,13 +16,13 @@ public class EmployeeController {
 
     @Autowired
     IEmployeeService employeeService;
-    @GetMapping("/employees")
+    @GetMapping("/admin/employees")
     public String getEmployees(Model model) {
         List<EmployeeResponse> employeeResponseDtoList = employeeService.getAllEmployees();
         List<EmployeeCredentialResponse> employeeCredentialResponses=employeeService.getAllEmployeesCredentials();
         model.addAttribute("employees", employeeResponseDtoList);
         model.addAttribute("employeesCredentials", employeeCredentialResponses);
-        return "employees";
+        return "admin/employees";
     }
 
 

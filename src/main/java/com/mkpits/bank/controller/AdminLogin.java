@@ -9,10 +9,10 @@ public class AdminLogin {
 
     @GetMapping("/admin")
     public String loginAdmin() {
-        return "auth-login-basic";
+        return "admin/auth-login-basic";
     }
-    @GetMapping("/auth-forget-password-basic")
+    @GetMapping("/admin/auth-forget-password-basic")
     public String forgetPassword() {
-        return "auth-forget-password-basic";
+        return "admin/auth-forget-password-basic";
     }
 }

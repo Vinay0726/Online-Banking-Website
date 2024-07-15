@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account settings - Account | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Update Employee</title>
 
     <meta name="description" content="" />
 
@@ -51,7 +51,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="dashboard" class="app-brand-link">
+                <a href="/admin/dashboard" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                  xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -111,7 +111,7 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item active">
-                    <a href="dashboard" class="menu-link">
+                    <a href="/admin/dashboard" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
@@ -129,18 +129,18 @@
                 </li>
                 <!-- Tables -->
                 <li class="menu-item">
-                    <a href="admin/adduser" class="menu-link">
+                    <a href="/admin/adduser" class="menu-link">
                         <i class='menu-icon bx bxs-user-plus'></i>
                         <div data-i18n="Tables">Add User</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="users" class="menu-link">
+                    <a href="/admin/users" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">Users</div>
                     </a>
                 <li class="menu-item">
-                    <a href="accounts" class="menu-link">
+                    <a href="/admin/accounts" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">Accounts</div>
                     </a>
@@ -153,7 +153,7 @@
                 </li>
                 <!-- Tables -->
                 <li class="menu-item">
-                    <a href="transaction" class="menu-link">
+                    <a href="/admin/transaction" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">Transaction</div>
                     </a>
@@ -168,7 +168,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="employees" class="menu-link">
+                    <a href="/admin/employees" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">Employee</div>
                     </a>
@@ -184,7 +184,7 @@
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="accounts-setting" class="menu-link">
+                            <a href="/admin/accounts-setting" class="menu-link">
                                 <div data-i18n="Account">Account</div>
                             </a>
                         </li>
@@ -203,12 +203,12 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="auth-register-basic" class="menu-link" target="_blank">
+                            <a href="/admin/auth-register-basic" class="menu-link" target="_blank">
                                 <div data-i18n="Basic">Register</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="auth-forgot-password-basic" class="menu-link" target="_blank">
+                            <a href="/admin/auth-forgot-password-basic" class="menu-link" target="_blank">
                                 <div data-i18n="Basic">Forgot Password</div>
                             </a>
                         </li>
@@ -287,7 +287,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="accounts-setting.html">
+                                    <a class="dropdown-item" href="/admin/accounts-setting.html">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
@@ -407,7 +407,7 @@
                                                     <div class="form-row">
                                                         <div class="form-group col-md-4 mt-1">
                                                             <label for="city">City: <span th:text="*{city}"></span> </label>
-                                                            <select id="city" class="form-control" th:field="*{city}"  required data-selected-city="${city}">
+                                                            <select id="city" class="form-control" th:field="*{city}" >
                                                                 <option value="" disabled >Select City</option>
 
                                                             </select>

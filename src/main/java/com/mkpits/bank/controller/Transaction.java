@@ -14,10 +14,10 @@ import java.util.List;
 public class Transaction {
 @Autowired
     IUserService userService;
-    @GetMapping("/transaction")
+    @GetMapping("/admin/transaction")
     public String getTransaction(Model model) {
         List<TransactionResponse> transactionResponseList=userService.getAllTransactions();
         model.addAttribute("transactions",transactionResponseList);
-        return "transaction";
+        return "admin/transaction";
     }
 }
