@@ -350,7 +350,8 @@
                                             <td th:text="${employee.email}"></td>
                                             <td th:text="${employee.dateOfBirth}"></td>
                                             <td id="addressSize" style th:text="${employee.address} + ', ' + ${employee.city} + ', ' + ${employee.state} + ', ' + ${employee.pinCode}"></td>
-                                            <td th:text="${employee.aadhaarCard}"></td>
+                                            <td ><span th:if="${employee.aadhaarCard != null}" th:text="'**** **** ' + ${employee.aadhaarCard.substring(employee.aadhaarCard.length() - 4)}"></span>
+                                                <span th:if="${employee.aadhaarCard == null}"></span></td>
                                             <td th:text="${employee.createdAt}"></td>
                                             <td>
                                                 <div class="dropdown">
@@ -388,7 +389,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>UserName</th>
-                                                <th>Password</th>
+<!--                                                <th>Password</th>-->
                                                 <th>Created at</th>
                                                 <th>Updated at</th>
                                                 <th>Actions</th>
@@ -400,7 +401,7 @@
                                             <tr th:each="employeeCredential : ${employeesCredentials}">
                                                 <td ><strong th:text="${employeeCredential.fullName}"></strong></td>
                                                 <td th:text="${employeeCredential.userName}"></td>
-                                                <td th:text="${employeeCredential.password}"></td>
+<!--                                                <td th:text="${employeeCredential.password}"></td>-->
                                                 <td th:text="${employeeCredential.createdAt}"></td>
                                                 <td th:text="${employeeCredential.updatedAt}"></td>
                                                 <td>

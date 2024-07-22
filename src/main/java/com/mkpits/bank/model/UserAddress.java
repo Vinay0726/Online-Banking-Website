@@ -62,6 +62,9 @@ public class UserAddress {
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "state_id", insertable = false, updatable = false)
 //    private UserState state;
+@ManyToOne
+@JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+private UserCredential userCredential;
 
 }
 

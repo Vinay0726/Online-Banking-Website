@@ -1,0 +1,32 @@
+.balance-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 20px 0;
+}
+
+.balance-card .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.balance-card .balance-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+.balance-card img {
+  margin-bottom: 15px;
+}
+ .balance-card .transaction-summary {
+            font-size: 0.5rem;
+        }
+
+        .balance-card .account-details {
+            font-size: 0.5rem;
+        }
+
+.balance-card .transaction-summary {
+  font-size: 1rem;
+}

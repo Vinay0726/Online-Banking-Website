@@ -366,7 +366,8 @@
                                             <td th:text="${user.dateOfBirth}"></td>
 <!--                                            <td th:text="${user.address}"></td>-->
                                             <td th:text="${user.cin}"></td>
-                                            <td th:text="${user.aadhaarCard}"></td>
+                                            <td > <span th:if="${user.aadhaarCard != null}" th:text="'**** **** ' + ${user.aadhaarCard.substring(user.aadhaarCard.length() - 4)}"></span>
+                                                <span th:if="${user.aadhaarCard == null}"></span></td>
                                             <td th:text="${user.createdAt}"></td>
                                             <td th:text="${user.updatedAt}"></td>
                                             <td><span class="badge bg-label-primary me-1">Active</span></td>
@@ -405,7 +406,8 @@
 
                                             <tr> <th>Name</th>
                                                 <th>UserName</th>
-                                                <th>Password</th>
+
+<!--                                                <th>Password</th>-->
 
                                                 <th>Login dateTime</th>
                                                 <th>Created at</th>
@@ -419,7 +421,8 @@
                                             <tr th:each="userCredential : ${usersCredentials}">
                                                 <td ><strong th:text="${userCredential.fullName}"></strong></td>
                                                 <td th:text="${userCredential.userName}" ></td>
-                                                <td th:text="${userCredential.password}" ></td>
+
+<!--                                                <td th:text="${userCredential.password}" ></td>-->
                                                 <td th:text="${userCredential.loginDateTime}"></td>
                                                 <td th:text="${userCredential.createdAt}"></td>
                                                 <td th:text="${userCredential.updatedAt}"></td>

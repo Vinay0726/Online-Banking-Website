@@ -1,9 +1,9 @@
 package com.mkpits.bank.service;
 
 
-import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.*;
+import com.mkpits.bank.model.Account;
 import com.mkpits.bank.model.User;
 
 import java.math.BigDecimal;
@@ -43,12 +43,28 @@ public List<AccountResponse> getAccountByUserId(Integer userId);
    //get user by id
     Optional<User> getUserById(Long id);
 
-//update user
-    void updateUserData(Long userId, UserRequest userRequest);
+
 
     //get Total balance of accounts
     BigDecimal getTotalBalance();
 
     //get last 5 users
     List<User> getLast5Users();
+
+//update user
+    void updateUserData(Long userId, UserRequest userRequest);
+
+//get accounts by user Id
+    List<AccountResponse> getAccountDetailsByUserId(Integer userId);
+
+
+    long getTotalAccountsByUserId(Integer userId);
+
+    long getTotalTransactionsByUserId(Integer userId);
+
+    BigDecimal getTotalBalanceByUserId(Integer userId);
+
+    Optional<Account> getAccountByAccountNumber(String accountNumber);
+
+    Optional<Account> getAccountsByUserId(Integer userId);
 }

@@ -2,6 +2,8 @@ package com.mkpits.bank.controller;
 
 import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.request.UserRequest;
+import com.mkpits.bank.dto.response.UserCredentialResponse;
+import com.mkpits.bank.dto.response.UserResponse;
 import com.mkpits.bank.model.*;
 import com.mkpits.bank.repository.*;
 import com.mkpits.bank.service.IEmployeeService;
@@ -51,6 +53,15 @@ public class AdminController {
         model.addAttribute("userForm",new UserRequest());
         return "admin/adduser";
     }
+    //get all users & credentials
+    @GetMapping("/admin/users")
+    public String getUsers(Model model) {
+        List<UserResponse> userResponseDtoList = userService.getAllUsers();
+        List<UserCredentialResponse> userCredentialResponses = userService.getAllUsersCredentials();
+        model.addAttribute("users", userResponseDtoList);
+        model.addAttribute("usersCredentials", userCredentialResponses);
+        return "admin/users";
+    }
 
     @PostMapping ("/admin/adduser")
    public String registerUsers(@ModelAttribute UserRequest userRequest, Model model)  {
@@ -58,7 +69,7 @@ public class AdminController {
         try {
             UserRequest registeredUser = userService.registerUsers(userRequest);
             model.addAttribute("message", "User registered successfully");
-            return "redirect:admin/users";
+            return "redirect:/admin/users";
         } catch (Exception e) {
             model.addAttribute("error", "Failed to register user: " + e.getMessage());
             // You might want to add userRequest or other necessary attributes back to the model
@@ -66,53 +77,53 @@ public class AdminController {
         }
     }
 
+
 //    Update User
 
     @GetMapping("/admin/updateuser/{id}")
     public String getUpdateUserForm(@PathVariable("id") Long id, Model model) {
         Optional<User> userOptional = userRepository.findById(Math.toIntExact(id));
 
-        System.out.println(userOptional);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             UserCredential userCredential = userCredentialRepository.findByUserId(user.getId()).orElse(new UserCredential());
-            Account account = accountRepository.findByUserId(user.getId()).orElse(new Account());
+//            Account account = accountRepository.findByUserId(user.getId()).orElse(new Account());
             UserAddress userAddress = addressRepository.findByUserId(user.getId()).orElse(new UserAddress());
             UserState userState = stateRepository.findById(userAddress.getStateId()).orElse(new UserState());
             UserDistrict userDistrict = districtRepository.findById(userAddress.getDistrictId()).orElse(new UserDistrict());
             UserCity userCity = cityRepository.findById(userAddress.getCityId()).orElse(new UserCity());
 
-
             UserRequest userRequest = new UserRequest();
             userRequest.setUser(user);
             userRequest.setUserCredential(userCredential);
-            userRequest.setAccount(account);
+//            userRequest.setAccount(account);
             userRequest.setAddress(userAddress);
             userRequest.setState(userState);
             userRequest.setDistrict(userDistrict);
             userRequest.setCity(userCity);
+            userRequest.setUserId(id); // Set userId in userRequest
 
             model.addAttribute("userRequest", userRequest);
-            model.addAttribute("userId", id);
             return "admin/edituser";
         } else {
             // Handle the case where the user is not found
-            return "redirect:admin/users";
+            return "redirect:/admin/users";
         }
     }
+
     @PostMapping("/admin/updateuser")
-    public String updateUser(@ModelAttribute UserRequest userRequest, @RequestParam Long userId, Model model) {
-
-        userService.updateUserData(userId,userRequest);
-
+    public String updateUser(@ModelAttribute UserRequest userRequest, Model model) {
+        userService.updateUserData(userRequest.getUserId(), userRequest);
         model.addAttribute("message", "User updated successfully");
-        return "redirect:admin/users";
+        return "redirect:/admin/users";
     }
+
+
     //Delete user by id
     @GetMapping("/admin/deleteuser/{id}")
       public String deleteUser(@PathVariable("id") Long id){
        userService.deleteUserById(id) ;
-       return "redirect:admin/users";
+       return "redirect:/admin/users";
     }
 
 
@@ -129,7 +140,7 @@ public class AdminController {
     public String registerEmployees(@ModelAttribute("employeeRequest") EmployeeRequest employeeRequest, Model model) {
         employeeService.registerEmployees(employeeRequest);
         model.addAttribute("message", "Employee registered successfully");
-        return "redirect:admin/employees";
+        return "redirect:/admin/employees";
     }
 
 
@@ -165,7 +176,7 @@ public class AdminController {
             return "admin/editemployee";
         } else {
             // Handle the case where the employee is not found
-            return "redirect:admin/employees";
+            return "redirect:/admin/employees";
         }
     }
     @PostMapping("/admin/updateemployee")
@@ -174,7 +185,7 @@ public class AdminController {
         employeeService.updateEmployeeData(employeeId,employeeRequest);
 
             model.addAttribute("message", "Employee updated successfully");
-        return "redirect:admin/employees";
+        return "redirect:/admin/employees";
     }
 
 

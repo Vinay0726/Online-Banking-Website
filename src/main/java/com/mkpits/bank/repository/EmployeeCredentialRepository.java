@@ -8,4 +8,7 @@ import java.util.Optional;
 public interface EmployeeCredentialRepository extends JpaRepository<EmployeeCredential,Integer> {
 
     Optional<EmployeeCredential> findByEmployeeId(Integer id);
+
+    //for login
+    Optional<EmployeeCredential> findByUserName(String username);
 }

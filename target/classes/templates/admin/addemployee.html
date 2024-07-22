@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account settings - Account | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Add Employee</title>
 
     <meta name="description" content="" />
 
@@ -322,42 +322,48 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="container mt-5">
                                 <div class="row justify-content-center">
                                     <div class="container">
                                         <h1 class="mb-4">Add Employee</h1>
-                                        <form th:action="@{/admin/addemployee}" method="post" th:object="${employeeRequest}">
-                                            <div class="card">
+                                        <form th:action="@{/admin/addemployee}" method="post" th:object="${employeeRequest}" class="row g-3">
+                                            <!-- Employee Details -->
+                                            <div class="card col-md-12">
                                                 <div class="card-header">Employee Details</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="firstName">First Name:</label>
+                                                    <div class="row">
+                                                        <!-- First Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="firstName" class="form-label">First Name:</label>
                                                             <input type="text" id="firstName" class="form-control" th:field="*{firstName}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="middleName">Middle Name:</label>
+                                                        <!-- Middle Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="middleName" class="form-label">Middle Name:</label>
                                                             <input type="text" id="middleName" class="form-control" th:field="*{middleName}"/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="lastName">Last Name:</label>
+                                                        <!-- Last Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="lastName" class="form-label">Last Name:</label>
                                                             <input type="text" id="lastName" class="form-control" th:field="*{lastName}" required/>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="mobileNumber">Mobile Number:</label>
+                                                    <div class="row mt-3">
+                                                        <!-- Mobile Number -->
+                                                        <div class="col-md-4">
+                                                            <label for="mobileNumber" class="form-label">Mobile Number:</label>
                                                             <input type="text" id="mobileNumber" class="form-control" th:field="*{mobileNumber}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="email">Email:</label>
+                                                        <!-- Email -->
+                                                        <div class="col-md-4">
+                                                            <label for="email" class="form-label">Email:</label>
                                                             <input type="email" id="email" class="form-control" th:field="*{email}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="gender">Gender:</label>
+                                                        <!-- Gender -->
+                                                        <div class="col-md-4">
+                                                            <label for="gender" class="form-label">Gender:</label>
                                                             <select id="gender" class="form-control" th:field="*{gender}" required>
                                                                 <option value="" disabled selected>Select Gender</option>
                                                                 <option value="Male">Male</option>
@@ -366,30 +372,34 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="dateOfBirth">Date of Birth:</label>
+                                                    <div class="row mt-3">
+                                                        <!-- Date of Birth -->
+                                                        <div class="col-md-4">
+                                                            <label for="dateOfBirth" class="form-label">Date of Birth:</label>
                                                             <input type="date" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}" required/>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="aadharNumber">Aadhar Number:</label>
+                                                        <!-- Aadhar Card -->
+                                                        <div class="col-md-4">
+                                                            <label for="aadharNumber" class="form-label">Aadhar Number:</label>
                                                             <input type="number" id="aadharNumber" class="form-control" th:field="*{adhaarCard}" required/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card mt-4">
+
+                                            <!-- Address -->
+                                            <div class="card col-md-12 mt-4">
                                                 <div class="card-header">Address</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="address">Address:</label>
+                                                    <div class="row">
+                                                        <!-- Address -->
+                                                        <div class="col-md-4">
+                                                            <label for="address" class="form-label">Address:</label>
                                                             <input type="text" id="address" class="form-control" th:field="*{address}" required />
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="state">State:</label>
+                                                        <!-- State -->
+                                                        <div class="col-md-4">
+                                                            <label for="state" class="form-label">State:</label>
                                                             <select id="state" onchange="populateCities()" class="form-control" th:field="*{state}" required>
                                                                 <option value="" disabled selected>Select State</option>
                                                                 <option value="Maharashtra">Maharashtra</option>
@@ -400,52 +410,56 @@
                                                                 <option value="Madhya Pradesh">Madhya Pradesh</option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="city">City:</label>
+                                                        <!-- City -->
+                                                        <div class="col-md-4">
+                                                            <label for="city" class="form-label">City:</label>
                                                             <select id="city" class="form-control" th:field="*{city}" required>
                                                                 <option value="" disabled selected>Select City</option>
                                                             </select>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="pincode">Pincode:</label>
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <!-- Pincode -->
+                                                        <div class="col-md-4">
+                                                            <label for="pincode" class="form-label">Pincode:</label>
                                                             <input type="number" id="pincode" class="form-control" th:field="*{pinCode}" required />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card mt-4">
+
+                                            <!-- Employee Credentials -->
+                                            <div class="card col-md-12 mt-4">
                                                 <div class="card-header">Employee Credentials</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="username">Username:</label>
+                                                    <div class="row">
+                                                        <!-- Username -->
+                                                        <div class="col-md-4">
+                                                            <label for="username" class="form-label">Username:</label>
                                                             <input type="text" id="username" class="form-control" th:field="*{userName}" required/>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="password">Password:</label>
+                                                        <!-- Password -->
+                                                        <div class="col-md-4">
+                                                            <label for="password" class="form-label">Password:</label>
                                                             <input type="password" id="password" class="form-control" th:field="*{password}" required/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4">
+
+                                            <!-- Submit Button -->
+                                            <div class="form-group col-md-12 mt-4">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </form>
-
                                         <p th:text="${message}" class="mt-4 text-success"></p>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
+
                 <!-- / Content -->
 
                 <!-- Footer -->

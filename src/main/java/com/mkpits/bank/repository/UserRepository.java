@@ -20,4 +20,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 //    get last 5 users
     @Query("SELECT u FROM User u ORDER BY u.createdAt DESC LIMIT 5")
     List<User> findTop5ByOrderByUsersDateTimeDesc();
+
 }

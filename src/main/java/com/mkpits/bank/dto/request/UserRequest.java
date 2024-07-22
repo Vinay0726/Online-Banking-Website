@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UserRequest {
     private Long id;
+    private Long userId;
     private User user;
     private Account account;
     private UserCredential userCredential;

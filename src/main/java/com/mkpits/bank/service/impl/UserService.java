@@ -1,7 +1,5 @@
 package com.mkpits.bank.service.impl;
 
-import com.google.common.hash.Hashing;
-
 import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.AccountResponse;
 import com.mkpits.bank.dto.response.TransactionResponse;
@@ -16,34 +14,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
-@Autowired
+    @Autowired
     UserRepository userRepository;
-@Autowired
+    @Autowired
     AccountRepository accountRepository;
-@Autowired
+    @Autowired
     UserCredentialRepository userCredentialRepository;
-@Autowired
-TransactionRepository transactionRepository;
+    @Autowired
+    TransactionRepository transactionRepository;
 
-@Autowired
-UserAddressRepo addressRepository;
-@Autowired
-UserStateRepo stateRepository;
-@Autowired
-UserCityRepo cityRepository;
-@Autowired
-UserDistrictRepo districtRepository;
+    @Autowired
+    UserAddressRepo addressRepository;
+    @Autowired
+    UserStateRepo stateRepository;
+    @Autowired
+    UserCityRepo cityRepository;
+    @Autowired
+    UserDistrictRepo districtRepository;
 
     @Override
     public List<UserResponse> getAllUsers() {
@@ -52,7 +48,7 @@ UserDistrictRepo districtRepository;
 
         List<UserResponse> userRequestDtoList = new ArrayList<>();
 
-        for(User user : userList){
+        for (User user : userList) {
             UserResponse userGetResponseDto = convertUserModelToUserDtoGetResponse(user);
             userGetResponseDto.setId(user.getId());
             userRequestDtoList.add(userGetResponseDto);
@@ -65,7 +61,7 @@ UserDistrictRepo districtRepository;
         List<Account> accountList = (List<Account>) accountRepository.findAll();
 
         List<AccountResponse> accontRequestDtoList = new ArrayList<>();
-        for(Account account: accountList){
+        for (Account account : accountList) {
             AccountResponse accountResponse = convertAccountModelToAccountDtoGetResponse(account);
             accontRequestDtoList.add(accountResponse);
         }
@@ -74,12 +70,10 @@ UserDistrictRepo districtRepository;
 
     @Override
     public List<UserCredentialResponse> getAllUsersCredentials() {
-        List<UserCredential> userCredentialList= (List<UserCredential>)userCredentialRepository .findAll();
-       User user=new User();
+        List<UserCredential> userCredentialList = (List<UserCredential>) userCredentialRepository.findAll();
         List<UserCredentialResponse> userCredentialRequestlist = new ArrayList<>();
-        for(UserCredential userCredential: userCredentialList){
+        for (UserCredential userCredential : userCredentialList) {
             UserCredentialResponse userCredentialResponse = convertUserCredentialModelToUserCredentialDtoGetResponse(userCredential);
-            userCredentialResponse.setFullName(user.getFirstName()+' '+user.getLastName());
             userCredentialRequestlist.add(userCredentialResponse);
         }
         return userCredentialRequestlist;
@@ -87,10 +81,10 @@ UserDistrictRepo districtRepository;
 
     @Override
     public List<TransactionResponse> getAllTransactions() {
-        List<Transaction> transactionList= (List<Transaction>)transactionRepository .findAll();
+        List<Transaction> transactionList = (List<Transaction>) transactionRepository.findAll();
 
         List<TransactionResponse> TransactionRequestlist = new ArrayList<>();
-        for(Transaction transaction: transactionList){
+        for (Transaction transaction : transactionList) {
             TransactionResponse transactionResponse = convertTransactionModelToTransactionDtoGetResponse(transaction);
             TransactionRequestlist.add(transactionResponse);
         }
@@ -108,7 +102,7 @@ UserDistrictRepo districtRepository;
     @Override
     @Transactional
     public UserRequest registerUsers(UserRequest userRequest) {
-        User user=userRequest.getUser();
+        User user = userRequest.getUser();
         user.setCin(generateCIN());
         user.setCreatedAt(LocalDateTime.now());
         user.setCreatedBy(1);
@@ -116,7 +110,7 @@ UserDistrictRepo districtRepository;
         user.setUpdatedBy(1);
         userRepository.save(user);
 
-        Account account=userRequest.getAccount();
+        Account account = userRequest.getAccount();
         account.setUser(user);
         account.setUserId(user.getId());
         account.setAccountNumber(generateAccountNumber(userRequest));
@@ -133,15 +127,15 @@ UserDistrictRepo districtRepository;
         account.setUpdatedBy(1);
         accountRepository.save(account);
 
-        UserCredential userCredential=userRequest.getUserCredential();
+        UserCredential userCredential = userRequest.getUserCredential();
         // Set user in userCredential and save userCredential
         String uuid = UUID.randomUUID().toString();
         System.out.println("UUID: " + uuid);
-        final String computedPassword = Hashing.sha256()
-                .hashString(userCredential.getPassword(), StandardCharsets.UTF_8).toString() + uuid;
+//        final String computedPassword = Hashing.sha256()
+//                .hashString(userCredential.getPassword(), StandardCharsets.UTF_8).toString() + uuid;
         userCredential.setUserId(user.getId());
         userCredential.setUser(user);
-        userCredential.setPassword(computedPassword);
+//        userCredential.setPassword(computedPassword);
         userCredential.setPasswordSalt(uuid);
         userCredential.setLoginDateTime(LocalDateTime.now());
         userCredential.setCreatedBy(1);
@@ -149,8 +143,6 @@ UserDistrictRepo districtRepository;
         userCredential.setUpdatedBy(1);
         userCredential.setUpdatedAt(LocalDateTime.now());
         userCredentialRepository.save(userCredential);
-
-
 
 
 // Set user in address and save address
@@ -194,6 +186,7 @@ UserDistrictRepo districtRepository;
         addressRepository.save(userAddress);
         return userRequest;
     }
+
     @Override
     public void updateUserData(Long userId, UserRequest userRequest) {
 
@@ -223,15 +216,15 @@ UserDistrictRepo districtRepository;
             userCredentialRepository.save(userCredential);
         }
 
-        Optional<Account> accountOptional = accountRepository.findByUserId(Math.toIntExact(userId));
-        if (accountOptional.isPresent()) {
-            Account account = accountOptional.get();
-            account.setAccountType(userRequest.getAccount().getAccountType());
-            account.setBalance(userRequest.getAccount().getBalance());
-            account.setUpdatedAt(LocalDateTime.now());
-            account.setUpdatedBy(1);
-            accountRepository.save(account);
-        }
+//        Optional<Account> accountOptional = accountRepository.findByUserId(Math.toIntExact(userId));
+//        if (accountOptional.isPresent()) {
+//            Account account = accountOptional.get();
+//            account.setAccountType(userRequest.getAccount().getAccountType());
+//            account.setBalance(userRequest.getAccount().getBalance());
+//            account.setUpdatedAt(LocalDateTime.now());
+//            account.setUpdatedBy(1);
+//            accountRepository.save(account);
+//        }
 
         // Update Address
         Optional<UserAddress> userAddressOptional = addressRepository.findByUserId(Math.toIntExact(userId));
@@ -285,14 +278,29 @@ UserDistrictRepo districtRepository;
         }
     }
 
+    public List<AccountResponse> getAccountDetailsByUserId(Integer userId) {
+        List<Account> accounts = accountRepository.findAllByUserId(userId);
+        List<AccountResponse> accountResponses = new ArrayList<>();
+
+        for (Account account : accounts) {
+            AccountResponse accountResponse = new AccountResponse();
+            accountResponse.setAccountType(account.getAccountType());
+            accountResponse.setAccountNumber(account.getAccountNumber());
+            accountResponse.setBalance(account.getBalance());
+            accountResponse.setRateOfInterest(account.getRateOfInterest());
+            accountResponses.add(accountResponse);
+        }
+
+        return accountResponses;
+    }
 
 
 
     public String generateAccountNumber(UserRequest userRequest) {
 
-    UserState userState=userRequest.getState();
-    UserCity userCity=userRequest.getCity();
-    UserDistrict userDistrict=userRequest.getDistrict();
+        UserState userState = userRequest.getState();
+        UserCity userCity = userRequest.getCity();
+        UserDistrict userDistrict = userRequest.getDistrict();
         String stateName = userState.getName();
         String cityName = userCity.getName();
         String districtName = userDistrict.getName();
@@ -300,7 +308,7 @@ UserDistrictRepo districtRepository;
         // Convert names to codes
         String stateCode = convertStateNameToCode(stateName);
         String cityCode = convertCityNameToCode(cityName, stateName);
-        String districtCode = convertDistrictNameToCode(districtName, stateName,cityName);
+        String districtCode = convertDistrictNameToCode(districtName, stateName, cityName);
         // Get the highest existing number for this combination
         String prefix = String.format("%s%s%s", stateCode, cityCode, districtCode);
         String lastAccountNumber = accountRepository.findMaxAccountNumberByPrefix(prefix);
@@ -320,7 +328,7 @@ UserDistrictRepo districtRepository;
 
     }
 
-    private String convertDistrictNameToCode(String districtName, String stateName,String cityName) {
+    private String convertDistrictNameToCode(String districtName, String stateName, String cityName) {
 
 // Example logic to convert district name to code based on state and city
         return switch (stateName.toLowerCase()) {
@@ -524,7 +532,8 @@ UserDistrictRepo districtRepository;
     public long getTotalAccounts() {
         return accountRepository.count();
     }
-//  get accounts created today
+
+    //  get accounts created today
     @Override
     public long getTotalAccountsCreatedToday() {
         LocalDate today = LocalDate.now();
@@ -533,7 +542,32 @@ UserDistrictRepo districtRepository;
         return accountRepository.countByCreatedAtBetween(startOfDay, endOfDay);
     }
 
-//    get daily user in chart graph
+
+    // Method to get total accounts by user ID
+    public long getTotalAccountsByUserId(Integer userId) {
+        return accountRepository.countByUserId(userId);
+    }
+
+    // Method to get total transactions by user ID
+    public long getTotalTransactionsByUserId(Integer userId) {
+        return transactionRepository.countByUserId(userId);
+    }
+//get total balance of all accounts
+    public BigDecimal getTotalBalanceByUserId(Integer userId) {
+        List<Account> accounts = accountRepository.findAccountBalanceByUserId(userId);
+        return accounts.stream()
+                .map(Account::getBalance)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+    // Get all accounts by user ID
+    public Optional<Account> getAccountsByUserId(Integer userId) {
+        return accountRepository.findByUserId(userId);
+    }
+    public Optional<Account> getAccountByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber);
+    }
+
+    //    get daily user in chart graph
     @Override
     public List<Map<String, Object>> getDailyUserData() {
         List<Map<String, Object>> dailyUserData = new ArrayList<>();
@@ -568,13 +602,12 @@ UserDistrictRepo districtRepository;
         userRepository.deleteById(Math.toIntExact(id));
 
     }
-//get user by id
+
+    //get user by id
     @Override
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(Math.toIntExact(id));
     }
-
-
 
 
     //    automatically set rate of interest using accountType
@@ -589,8 +622,7 @@ UserDistrictRepo districtRepository;
     }
 
 
-
-//cin based on current datetime
+    //cin based on current datetime
     private String generateCIN() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         return LocalDateTime.now().format(formatter);
@@ -601,25 +633,29 @@ UserDistrictRepo districtRepository;
         User user = userRepository.findById(transaction.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        TransactionResponse transactionResponse=new TransactionResponse();
-        transactionResponse= TransactionResponse.builder().fullName(user.getFirstName()+' '+user.getLastName()).transactionType(String.valueOf(TransactionType.valueOf(transaction.getTransactionType().name()))).accountNumber(transaction.getAccountNumber()).amount(transaction.getAmount())
-            .transactionDateTime(transaction.getTransactionDateTime()).transactionStatus(transaction.getTransactionStatus()).build();
-    return transactionResponse;
+        TransactionResponse transactionResponse = new TransactionResponse();
+        transactionResponse = TransactionResponse.builder().fullName(user.getFirstName() + ' ' + user.getLastName()).transactionType(String.valueOf(TransactionType.valueOf(transaction.getTransactionType().name()))).accountNumber(transaction.getAccountNumber()).amount(transaction.getAmount())
+                .transactionDateTime(transaction.getTransactionDateTime()).transactionStatus(transaction.getTransactionStatus()).build();
+        return transactionResponse;
     }
 
     private UserCredentialResponse convertUserCredentialModelToUserCredentialDtoGetResponse(UserCredential userCredential) {
-    UserCredentialResponse userCredentialResponse=new UserCredentialResponse();
-        User user = userCredential.getUser();
-    userCredentialResponse=UserCredentialResponse.builder()
-            .userName(userCredential.getUserName()).password(userCredential.getPassword())
-            .loginDateTime(userCredential.getLoginDateTime()).createdAt(userCredential.getCreatedAt()).updatedAt(userCredential.getUpdatedAt()).build();
-    return userCredentialResponse;
+
+
+        User user = userCredential.getUser(); // Assuming UserCredential has a reference to User
+        String fullName = user.getFirstName() + " " + (user.getMiddleName() != null ? user.getMiddleName() + " " : "") + user.getLastName();
+
+        UserCredentialResponse userCredentialResponse = new UserCredentialResponse();
+        userCredentialResponse = UserCredentialResponse.builder().id(userCredential.getId())
+                .userName(userCredential.getUserName()).password(userCredential.getPassword())
+                .loginDateTime(userCredential.getLoginDateTime()).createdAt(userCredential.getCreatedAt()).updatedAt(userCredential.getUpdatedAt()).fullName(fullName).build();
+        return userCredentialResponse;
     }
 
     private AccountResponse convertAccountModelToAccountDtoGetResponse(Account account) {
-        AccountResponse accountResponse=new AccountResponse();
+        AccountResponse accountResponse = new AccountResponse();
         User user = account.getUser();
-            accountResponse= AccountResponse.builder().id(account.getId()).name(user.getFirstName()+' '+user.getLastName())
+        accountResponse = AccountResponse.builder().id(account.getId()).name(user.getFirstName() + ' ' + user.getLastName())
                 .accountType(account.getAccountType()).balance(account.getBalance()).accountNumber(account.getAccountNumber())
                 .rateOfInterest(account.getRateOfInterest()).branchId(account.getBranchId()).openingDate(account.getOpeningDate()).closingDate(account.getClosingDate()).build();
         return accountResponse;
@@ -627,15 +663,14 @@ UserDistrictRepo districtRepository;
     }
 
 
-
     private UserResponse convertUserModelToUserDtoGetResponse(User user) {
-        UserResponse userResponse=new UserResponse();
+        UserResponse userResponse = new UserResponse();
 
-         userResponse= UserResponse.builder()
+        userResponse = UserResponse.builder()
                 .firstName(user.getFirstName()).middleName(user.getMiddleName()).lastName(user.getLastName())
                 .mobileNumber(user.getMobileNumber()).email(user.getEmail()).gender(user.getGender()).dateOfBirth(user.getDateOfBirth()
-                        ).cin(user.getCin()).aadhaarCard(user.getAdhaarCard()).createdAt(user.getCreatedAt()).updatedAt(user.getUpdatedAt()).build();
-                 return userResponse;
+                ).cin(user.getCin()).aadhaarCard(user.getAdhaarCard()).createdAt(user.getCreatedAt()).updatedAt(user.getUpdatedAt()).build();
+        return userResponse;
 
     }
 }

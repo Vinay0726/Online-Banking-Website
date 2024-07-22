@@ -222,8 +222,8 @@
                 <li class="menu-item">
 
 
-                        <i class="menu-icon tf-icons bx bx-support"></i>
-                        <div data-i18n="Support">Support</div>
+                    <i class="menu-icon tf-icons bx bx-support"></i>
+                    <div data-i18n="Support">Support</div>
 
                 </li>
             </ul>
@@ -322,44 +322,50 @@
                 <!-- Content -->
 
                 <div class="container-xxl flex-grow-1 container-p-y">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="container mt-5">
                                 <div class="row justify-content-center">
                                     <div class="container">
                                         <h1 class="mb-4">Update User</h1>
-                                        <form th:action="@{/admin/updateuser}" method="post" th:object="${userRequest}">
-                                            <input type="hidden" th:name="userId" th:value="${userRequest.user.id}"/>
+                                        <form th:action="@{/admin/updateuser}"th:object="${userRequest}"  method="post" >
+                                            <input type="hidden" th:field="*{userId}" />
+
                                             <!-- User Details -->
-                                            <div class="card">
+                                            <div class="card col-md-12">
                                                 <div class="card-header">User Details</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4">
-                                                            <label for="firstName">First Name:</label>
-                                                            <input type="text" id="firstName" class="form-control" th:field="*{user.firstName}" th:value="*{user.firstName}" required/>
+                                                    <div class="row">
+                                                        <!-- First Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="firstName" class="form-label">First Name:</label>
+                                                            <input type="text" id="firstName" class="form-control" th:field="*{user.firstName}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="middleName">Middle Name:</label>
-                                                            <input type="text" id="middleName" class="form-control" th:field="*{user.middleName}" th:value="*{user.middleName}" />
+                                                        <!-- Middle Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="middleName" class="form-label">Middle Name:</label>
+                                                            <input type="text" id="middleName" class="form-control" th:field="*{user.middleName}" />
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="lastName">Last Name:</label>
-                                                            <input type="text" id="lastName" class="form-control" th:field="*{user.lastName}" th:value="*{user.lastName}" required/>
+                                                        <!-- Last Name -->
+                                                        <div class="col-md-4">
+                                                            <label for="lastName" class="form-label">Last Name:</label>
+                                                            <input type="text" id="lastName" class="form-control" th:field="*{user.lastName}" required/>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="mobileNumber">Mobile Number:</label>
-                                                            <input type="text" id="mobileNumber" class="form-control" th:field="*{user.mobileNumber}" th:value="*{user.mobileNumber}" required/>
+                                                    <div class="row mt-3">
+                                                        <!-- Mobile Number -->
+                                                        <div class="col-md-4">
+                                                            <label for="mobileNumber" class="form-label">Mobile Number:</label>
+                                                            <input type="text" id="mobileNumber" class="form-control" th:field="*{user.mobileNumber}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="email">Email:</label>
-                                                            <input type="email" id="email" class="form-control" th:field="*{user.email}" th:value="*{user.email}" required/>
+                                                        <!-- Email -->
+                                                        <div class="col-md-4">
+                                                            <label for="email" class="form-label">Email:</label>
+                                                            <input type="email" id="email" class="form-control" th:field="*{user.email}" required/>
                                                         </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="gender">Gender:</label>
+                                                        <!-- Gender -->
+                                                        <div class="col-md-4">
+                                                            <label for="gender" class="form-label">Gender:</label>
                                                             <select id="gender" class="form-control" th:field="*{user.gender}" required>
                                                                 <option value="" disabled>Select Gender</option>
                                                                 <option value="Male" th:selected="*{user.gender == 'Male'}">Male</option>
@@ -368,110 +374,117 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="dateOfBirth">Date of Birth:</label>
-                                                            <input type="date" id="dateOfBirth" class="form-control" th:field="*{user.dateOfBirth}" th:value="*{user.dateOfBirth}" required/>
+                                                    <div class="row mt-3">
+                                                        <!-- Date of Birth -->
+                                                        <div class="col-md-4">
+                                                            <label for="dateOfBirth" class="form-label">Date of Birth:</label>
+                                                            <input type="date" id="dateOfBirth" class="form-control" th:field="*{user.dateOfBirth}" required/>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="aadharNumber">Aadhar Number:</label>
-                                                            <input type="number" id="aadharNumber" class="form-control" th:field="*{user.adhaarCard}" th:value="*{user.adhaarCard}" required/>
+                                                        <!-- Aadhar Card -->
+                                                        <div class="col-md-4">
+                                                            <label for="aadharNumber" class="form-label">Aadhar Number:</label>
+                                                            <input type="number" id="aadharNumber" class="form-control" th:field="*{user.adhaarCard}" required/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <!-- Address -->
-                                            <div class="card mt-4">
+                                            <div class="card col-md-12 mt-4">
                                                 <div class="card-header">Address</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="address">Address:</label>
-                                                            <input type="text" id="address" class="form-control" th:field="*{address.address}" th:value="*{address.address}" required/>
-                                                        </div><div class="form-group col-md-4 mt-1">
-                                                        <label for="state">State: </label>
-                                                        <input type="hidden" th:field="*{address.state.id}" th:value="*{address.state.id}" />
-                                                        <select id="state" class="form-control" th:field="*{address.state.name}" required>
-                                                            <option value="" disabled>Select State</option>
-                                                            <option value="Maharashtra" th:selected="${userRequest.address.state.name == 'Maharashtra'}">Maharashtra</option>
-                                                            <option value="Gujarat" th:selected="${userRequest.address.state.name == 'Gujarat'}">Gujarat</option>
-                                                            <option value="Karnataka" th:selected="${userRequest.address.state.name == 'Karnataka'}">Karnataka</option>
-                                                            <option value="Punjab" th:selected="${userRequest.address.state.name == 'Punjab'}">Punjab</option>
-                                                            <option value="Uttar Pradesh" th:selected="${userRequest.address.state.name == 'Uttar Pradesh'}">Uttar Pradesh</option>
-                                                            <option value="Madhya Pradesh" th:selected="${userRequest.address.state.name == 'Madhya Pradesh'}">Madhya Pradesh</option>
-                                                        </select>
-                                                    </div>
-
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="city">City: </label>
-                                                            <input type="hidden" th:field="*{address.city.id}" th:value="*{address.city.id}" />
-                                                            <input type="text" class="form-control" th:value="*{address.city.name}" readonly />
+                                                    <div class="row">
+                                                        <!-- Address -->
+                                                        <div class="col-md-4">
+                                                            <label for="address" class="form-label">Address:</label>
+                                                            <input type="text" id="address" class="form-control" th:field="*{address.address}" required/>
+                                                        </div>
+                                                        <!-- State -->
+                                                        <div class="col-md-4">
+                                                            <label for="state" class="form-label">State:</label>
+                                                            <select id="state" class="form-control" th:field="*{address.state.name}" required>
+                                                                <option value="" disabled>Select State</option>
+                                                                <option value="Maharashtra" th:selected="*{address.state.name == 'Maharashtra'}">Maharashtra</option>
+                                                                <option value="Gujarat" th:selected="*{address.state.name == 'Gujarat'}">Gujarat</option>
+                                                                <option value="Karnataka" th:selected="*{address.state.name == 'Karnataka'}">Karnataka</option>
+                                                                <option value="Punjab" th:selected="*{address.state.name == 'Punjab'}">Punjab</option>
+                                                                <option value="Uttar Pradesh" th:selected="*{address.state.name == 'Uttar Pradesh'}">Uttar Pradesh</option>
+                                                                <option value="Madhya Pradesh" th:selected="*{address.state.name == 'Madhya Pradesh'}">Madhya Pradesh</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- City -->
+                                                        <div class="col-md-4">
+                                                            <label for="city" class="form-label">City:</label>
                                                             <select id="city" class="form-control" th:field="*{address.city.name}" required>
                                                                 <option value="" disabled>Select City</option>
-                                                                <!-- populate cities dynamically -->
+                                                                <!-- Populate dynamically with JavaScript or Thymeleaf -->
                                                             </select>
                                                         </div>
-
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="district">District: </label>
-                                                            <input type="hidden" th:field="*{address.district.id}" th:value="*{address.district.id}" />
-                                                            <input type="text" class="form-control" th:value="*{address.district.name}" readonly />
+                                                    </div>
+                                                    <div class="row mt-3">
+                                                        <!-- District -->
+                                                        <div class="col-md-4">
+                                                            <label for="district" class="form-label">District:</label>
                                                             <select id="district" class="form-control" th:field="*{address.district.name}" required>
                                                                 <option value="" disabled>Select District</option>
-                                                                <!-- populate districts dynamically -->
+                                                                <!-- Populate dynamically with JavaScript or Thymeleaf -->
                                                             </select>
                                                         </div>
+                                                        <!-- Pincode -->
+                                                        <div class="col-md-4">
+                                                            <label for="pincode" class="form-label">Pincode:</label>
+                                                            <input type="number" id="pincode" class="form-control" th:field="*{address.pincode}" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="pincode">Pincode:</label>
-                                                            <input type="number" id="pincode" class="form-control" th:field="*{address.pincode}" th:value="*{address.pincode}" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Account Details -->
-                                            <div class="card mt-4">
-                                                <div class="card-header">Account Details</div>
-                                                <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="accountType">Account Type:</label>
-                                                            <select id="accountType" class="form-control" th:field="*{account.accountType}" required onchange="setRateOfInterest()">
-                                                                <option value="" disabled>Select Account Type</option>
-                                                                <option value="Saving" th:selected="*{account.accountType == 'Saving'}">Saving</option>
-                                                                <option value="Current" th:selected="*{account.accountType == 'Current'}">Current</option>
-                                                                <option value="FD" th:selected="*{account.accountType == 'FD'}">FD</option>
-                                                                <option value="RD" th:selected="*{account.accountType == 'RD'}">RD</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="balance">Balance:</label>
-                                                            <input type="number" id="balance" class="form-control" th:field="*{account.balance}" th:value="*{account.balance}" required/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+<!--                                            &lt;!&ndash; Account Details &ndash;&gt;-->
+<!--                                            <div class="card col-md-12 mt-4">-->
+<!--                                                <div class="card-header">Account Details</div>-->
+<!--                                                <div class="card-body">-->
+<!--                                                    <div class="row">-->
+<!--                                                        &lt;!&ndash; Account Type &ndash;&gt;-->
+<!--                                                        <div class="col-md-4">-->
+<!--                                                            <label for="accountType" class="form-label">Account Type:</label>-->
+<!--                                                            <select id="accountType" class="form-control" th:field="*{account.accountType}" required onchange="setRateOfInterest()">-->
+<!--                                                                <option value="" disabled>Select Account Type</option>-->
+<!--                                                                <option value="Saving" th:selected="*{account.accountType == 'Saving'}">Saving</option>-->
+<!--                                                                <option value="Current" th:selected="*{account.accountType == 'Current'}">Current</option>-->
+<!--                                                                <option value="FD" th:selected="*{account.accountType == 'FD'}">FD</option>-->
+<!--                                                                <option value="RD" th:selected="*{account.accountType == 'RD'}">RD</option>-->
+<!--                                                            </select>-->
+<!--                                                        </div>-->
+<!--                                                        &lt;!&ndash; Balance &ndash;&gt;-->
+<!--                                                        <div class="col-md-4">-->
+<!--                                                            <label for="balance" class="form-label">Balance:</label>-->
+<!--                                                            <input type="number" id="balance" class="form-control" th:field="*{account.balance}" required/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+
                                             <!-- User Credentials -->
-                                            <div class="card mt-4">
+                                            <div class="card col-md-12 mt-4">
                                                 <div class="card-header">User Credentials</div>
                                                 <div class="card-body">
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="username">Username:</label>
-                                                            <input type="text" id="username" class="form-control" th:field="*{userCredential.userName}" th:value="*{userCredential.userName}" required/>
+                                                    <div class="row">
+                                                        <!-- Username -->
+                                                        <div class="col-md-4">
+                                                            <label for="username" class="form-label">Username:</label>
+                                                            <input type="text" id="username" class="form-control" th:field="*{userCredential.userName}" required/>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-4 mt-1">
-                                                            <label for="password">Password:</label>
-                                                            <input type="text" id="password" class="form-control" th:field="*{userCredential.password}" th:value="*{userCredential.password}" required/>
+                                                        <!-- Password -->
+                                                        <div class="col-md-4">
+                                                            <label for="password" class="form-label">Password:</label>
+                                                            <input type="password" id="password" class="form-control" th:field="*{userCredential.password}" required/>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4">
+
+                                            <!-- Submit Button -->
+                                            <div class="form-group col-md-12 mt-4">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </form>

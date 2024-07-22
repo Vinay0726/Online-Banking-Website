@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class UserCredential {
     @Column(name = "user_id")
     private Integer userId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
@@ -47,4 +48,9 @@ public class UserCredential {
 
     @Column(name = "updated_by")
     private Integer updatedBy;
+
+
+
+//    @OneToMany(mappedBy = "userCredential", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<UserAddress> addresses;
 }
