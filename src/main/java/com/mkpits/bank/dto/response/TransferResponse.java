@@ -14,7 +14,8 @@ import java.util.List;
 @AllArgsConstructor
 
 public class TransferResponse {
-
+    private Integer id;
+    private String fullName;
     private int senderId;
     private String senderAccountNumber;
     private int receiverId;

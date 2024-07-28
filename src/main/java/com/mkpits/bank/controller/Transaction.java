@@ -26,7 +26,9 @@ public class Transaction {
     @GetMapping("/admin/transaction")
     public String getTransaction(Model model) {
         List<TransactionResponse> transactionResponseList=userService.getAllTransactions();
+        List<TransferResponse> transferResponseList=userService.getAllTransferTransactions();
         model.addAttribute("transactions",transactionResponseList);
+        model.addAttribute("transfer",transferResponseList);
         return "admin/transaction";
     }
 

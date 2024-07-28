@@ -546,22 +546,22 @@
                   <div class="card-body">
 
                     <ul class="p-0 mt-5">
-                      <li class="d-flex mb-4 pb-1"  th:each="user : ${last5Users}">
+                      <li class="d-flex mb-4 pb-1" th:each="user : ${last5Users}">
                         <div class="avatar flex-shrink-0 me-3">
                           <span class="avatar-initial rounded bg-label-primary"><i class="bx bx-mobile-alt"></i></span>
                         </div>
                         <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                           <div class="me-2">
-                            <h6 class="mb-0" th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}"></h6>
-                            <small class="text-muted" th:each="account : ${user.accounts}" th:text="${account.accountType}"></small>
+                            <h6 class="mb-0" th:text="${user.firstName} + ' ' + ${user.middleName} + ' ' + ${user.lastName}">Vinay Thaware</h6>
+                            <span th:text="${#lists.size(user.accounts) > 0 ? user.accounts[0].accountType : ''}">Current</span>
                           </div>
-                          <div class="user-progress" th:each="account : ${user.accounts}">
-                            <small class="fw-semibold" th:text="${account.balance} + ' INR'">Balance</small>
+                          <div class="user-progress">
+                            <small class="fw-semibold" th:text="${#lists.size(user.accounts) > 0 ? user.accounts[0].balance : ''}">Balance</small>
                           </div>
                         </div>
                       </li>
-
                     </ul>
+
                   </div>
                 </div>
               </div>

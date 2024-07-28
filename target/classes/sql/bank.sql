@@ -131,6 +131,21 @@ CREATE TABLE transaction (
     updated_by INT,
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
+CREATE TABLE pending_transaction_request (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    account_number VARCHAR(14) NOT NULL,
+    amount DECIMAL(15, 2) NOT NULL,
+    transaction_type VARCHAR(255) NOT NULL,
+    request_date_time TIMESTAMP NOT NULL,
+    status VARCHAR(12) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    created_by INT NOT NULL,
+    updated_at TIMESTAMP,
+    updated_by INT,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
 
 -- Create admin table
 CREATE TABLE admin (

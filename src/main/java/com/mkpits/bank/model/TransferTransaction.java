@@ -19,6 +19,10 @@ public class TransferTransaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id",insertable=false, updatable=false)
+    private User user;
+
     @Column(name = "sender_id", nullable = false)
     private Integer senderId;
 

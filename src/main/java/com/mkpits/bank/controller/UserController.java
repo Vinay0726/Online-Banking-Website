@@ -11,6 +11,7 @@ import com.mkpits.bank.dto.response.UserResponse;
 import com.mkpits.bank.model.*;
 import com.mkpits.bank.model.Transaction;
 import com.mkpits.bank.repository.*;
+import com.mkpits.bank.service.IPendingTransactionService;
 import com.mkpits.bank.service.ITransactionService;
 import com.mkpits.bank.service.IUserService;
 import com.mkpits.bank.service.impl.CustomUserDetails;
@@ -33,6 +34,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     ITransactionService transactionService;
+    @Autowired
+    IPendingTransactionService pendingTransactionService;
     @Autowired
     IUserService userService;
     @Autowired
@@ -230,44 +233,44 @@ public class UserController {
         return "/user/profile-setting";
     }
 
-    //for credit and debit amount
     @GetMapping("/user/credit")
-    public String getCreditForm(Model model) {
+    public String getCreditRequestForm(Model model) {
         model.addAttribute("transactionRequest", new TransactionRequest());
         return "user/credit";
     }
 
     @GetMapping("/user/debit")
-    public String getDebitForm(Model model) {
+    public String getDebitRequestForm(Model model) {
         model.addAttribute("transactionRequest", new TransactionRequest());
         return "user/debit";
     }
 
-    @PostMapping("/user/credit")
-    public String creditAmount(@ModelAttribute TransactionRequest transactionRequest, Model model) {
+    @PostMapping("/user/requestCredit")
+    public String requestCredit(@ModelAttribute TransactionRequest transactionRequest, Model model) {
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            transactionService.processTransaction(transactionRequest, username, TransactionType.Credit);
-            model.addAttribute("message", "Credit successful!");
+            pendingTransactionService.createPendingRequest(transactionRequest, username, TransactionType.Credit);
+            model.addAttribute("message", "Credit request submitted for approval!");
             return "user/transaction";
         } catch (Exception e) {
-            model.addAttribute("message", "Credit failed: " + e.getMessage());
+            model.addAttribute("message", "Credit request failed: " + e.getMessage());
             return "user/transaction";
         }
     }
 
-    @PostMapping("/user/debit")
-    public String debitAmount(@ModelAttribute TransactionRequest transactionRequest, Model model) {
+    @PostMapping("/user/requestDebit")
+    public String requestDebit(@ModelAttribute TransactionRequest transactionRequest, Model model) {
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            transactionService.processTransaction(transactionRequest, username, TransactionType.Debit);
-            model.addAttribute("message", "Debit successful!");
+            pendingTransactionService.createPendingRequest(transactionRequest, username, TransactionType.Debit);
+            model.addAttribute("message", "Debit request submitted for approval!");
             return "user/transaction";
         } catch (Exception e) {
-            model.addAttribute("message", "Debit failed: " + e.getMessage());
+            model.addAttribute("message", "Debit request failed: " + e.getMessage());
             return "user/transaction";
         }
     }
+
 
     //for transfer amount from one user to another
     @GetMapping("/user/transfer")

@@ -20,6 +20,8 @@ public List<UserCredentialResponse> getAllUsersCredentials();
 
 public List<TransactionResponse> getAllTransactions();
 
+public  List<TransferResponse> getAllTransferTransactions();
+
 public List<AccountResponse> getAccountByUserId(Integer userId);
 
 //for Register  User
@@ -66,5 +68,7 @@ public List<AccountResponse> getAccountByUserId(Integer userId);
 
     Optional<Account> getAccountByAccountNumber(String accountNumber);
 
-    Optional<Account> getAccountsByUserId(Integer userId);
+//    Optional<Account> getAccountsByUserId(Integer userId);
+
+
 }

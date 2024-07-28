@@ -21,8 +21,8 @@ public interface ITransactionService {
    //get all transaction
     List<TransferTransaction> getAllTransactions(Long id);
 
-    //for credit and debit amount
-    void processTransaction(TransactionRequest transactionRequest, String username, TransactionType transactionType);
+//    //for credit and debit amount
+//    void processTransaction(TransactionRequest transactionRequest, String username, TransactionType transactionType);
     //for get credit and debit transaction
     List<Transaction> getTransactionsForUser(String username);
 
@@ -43,6 +43,7 @@ public interface ITransactionService {
     int getTotalTransactionsByAccountNumber(String defaultAccountNumber);
 
     BigDecimal getBalanceByAccountNumber(String defaultAccountNumber);
+
 
 
 }

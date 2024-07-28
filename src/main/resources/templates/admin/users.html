@@ -357,7 +357,7 @@
                                     <tbody class="table-border-bottom-0">
                                         <tr th:each="user : ${users}">
                                             <td>
-                                                <a th:href="@{'/accounts/' + ${user.id}}" th:onclick="'showAccount(' + ${user.id} + ')'"
+                                                <a th:href="@{'/admin/accounts/' + ${user.id}}" th:onclick="'showAccount(' + ${user.id} + ')'"
                                                    th:text="${user.firstName} + ' ' + ${user.middleName ?: ''} + ' ' + ${user.lastName}"></a>
                                             </td>
                                             <td th:text="${user.mobileNumber}"></td>

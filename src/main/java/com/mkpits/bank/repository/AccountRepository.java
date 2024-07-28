@@ -20,8 +20,8 @@ public interface AccountRepository extends JpaRepository<Account,Integer> {
 //for getting last four account number unique increase number if 0001 then 0002
     @Query("SELECT MAX(a.accountNumber) FROM Account a WHERE a.accountNumber LIKE CONCAT(:prefix, '%')")
     String findMaxAccountNumberByPrefix(String prefix);
-
-    Optional<Account> findByUserId(Integer id);
+    List<Account> findByUserId(Integer id);
+    Optional<Account> findAccountsByUserId(Integer id);
 
     List<Account> findAccountBalanceByUserId(Integer userId);
     //for getting accounts by user id

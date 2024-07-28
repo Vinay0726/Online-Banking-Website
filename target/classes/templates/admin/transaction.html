@@ -338,7 +338,7 @@
 
                         <!-- Basic Bootstrap Table -->
                         <div class="card">
-                            <h5 class="card-header">Transaction History</h5>
+                            <h5 class="card-header">Credit / Debit History</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table" id="example">
                                     <thead>
@@ -349,7 +349,7 @@
                                             <th>Transaction Date</th>
                                             <th>Transaction Type</th>
                                             <th>Transaction Status</th>
-                                            <th>Actions</th>
+
 
                                         </tr>
                                     </thead>
@@ -359,30 +359,54 @@
                                             <td th:text="${transaction.accountNumber}"></td>
                                             <td th:text="${transaction.amount}"></td>
                                             <td th:text="${transaction.transactionDateTime}"></td>
-                                            <td th:text="${transaction.transactionType}"></td>
+                                            <td ><span th:if="${transaction.transactionType == 'Credit'}" class="text-success" th:text="${transaction.transactionType}"></span>
+                                                <span th:unless="${transaction.transactionType == 'Credit'}" class="text-danger" th:text="${transaction.transactionType}"></span></td>
                                             <td><span class="badge bg-label-primary me-1" th:text="${transaction.transactionStatus}"></span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                           
                                         </tr>
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
                         <!--/ Basic Bootstrap Table -->
+                    <div class="container-xxl flex-grow-1 container-p-y">
 
+                        <!-- Basic Bootstrap Table -->
+                        <div class="card">
+                            <h5 class="card-header">Transfer History</h5>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table" id="example1">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <!--                                    <th scope="col">Sender ID</th>-->
+                                        <th scope="col">Sender Account</th>
+                                        <!--                                    <th scope="col">Receiver ID</th>-->
+                                        <th scope="col">Receiver Account</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Sender Balance</th>
+                                        <th scope="col">Receiver Balance</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                    <tr th:each="transfer : ${transfer}">
+                                        <td><strong  th:text="${transfer.fullName}"></strong></td>
+                                        <td th:text="${transfer.senderAccountNumber}"></td>
+                                        <td th:text="${transfer.receiverAccountNumber}"></td>
+                                        <td  th:text="${transfer.transferredAmount}"></td>
+                                        <td class="text-danger" th:text="${transfer.senderBalance}">3000</td>
+                                        <td class="text-success" th:text="${transfer.receiverBalance}">7000</td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                         <hr class="my-5" />
 
 
@@ -447,7 +471,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function () {
-                $("#example").DataTable();
+                $("#example").DataTable(); $("#example1").DataTable();
             });
         </script>
 </body>

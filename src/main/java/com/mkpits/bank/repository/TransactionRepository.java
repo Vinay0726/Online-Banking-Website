@@ -48,4 +48,13 @@ public interface TransactionRepository extends JpaRepository<Transaction,Integer
 
 
     long countByUserId(Integer userId);
+    //get transaction data for graph
+    @Query("SELECT CAST(t.transactionDateTime AS date) AS date, " +
+            "SUM(CASE WHEN t.transactionType = 'Credit' THEN t.amount ELSE 0 END) AS credit, " +
+            "SUM(CASE WHEN t.transactionType = 'Debit' THEN t.amount ELSE 0 END) AS debit, " +
+            "SUM(CASE WHEN t.transactionType = 'Transfer' THEN t.amount ELSE 0 END) AS transfer " +
+            "FROM Transaction t GROUP BY CAST(t.transactionDateTime AS date) ORDER BY CAST(t.transactionDateTime AS date)")
+    List<Object[]> findTransactionData();
+
+
 }

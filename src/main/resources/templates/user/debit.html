@@ -209,7 +209,8 @@
                                         <div class="card form-container">
                                             <div class="card-body">
                                                 <h4 class="card-title text-center text-muted">Debit Amount</h4>
-                                                <form th:action="@{/user/debit}" th:object="${transactionRequest}" method="post">
+                                                <!-- Debit Form -->
+                                                <form th:action="@{/user/requestDebit}" th:object="${transactionRequest}" method="post">
                                                     <div class="form-group">
                                                         <label for="accountNumber">Account Number</label>
                                                         <input type="text" class="form-control" id="accountNumber" th:field="*{accountNumber}" placeholder="Enter account number">

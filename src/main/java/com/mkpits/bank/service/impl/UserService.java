@@ -1,10 +1,7 @@
 package com.mkpits.bank.service.impl;
 
 import com.mkpits.bank.dto.request.UserRequest;
-import com.mkpits.bank.dto.response.AccountResponse;
-import com.mkpits.bank.dto.response.TransactionResponse;
-import com.mkpits.bank.dto.response.UserCredentialResponse;
-import com.mkpits.bank.dto.response.UserResponse;
+import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.*;
 import com.mkpits.bank.repository.*;
 import com.mkpits.bank.service.IUserService;
@@ -31,7 +28,8 @@ public class UserService implements IUserService {
     UserCredentialRepository userCredentialRepository;
     @Autowired
     TransactionRepository transactionRepository;
-
+@Autowired
+TransferTransactionRepository transferTransactionRepository;
     @Autowired
     UserAddressRepo addressRepository;
     @Autowired
@@ -82,7 +80,6 @@ public class UserService implements IUserService {
     @Override
     public List<TransactionResponse> getAllTransactions() {
         List<Transaction> transactionList = (List<Transaction>) transactionRepository.findAll();
-
         List<TransactionResponse> TransactionRequestlist = new ArrayList<>();
         for (Transaction transaction : transactionList) {
             TransactionResponse transactionResponse = convertTransactionModelToTransactionDtoGetResponse(transaction);
@@ -93,10 +90,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<AccountResponse> getAccountByUserId(Integer userId) {
-        Optional<Account> accounts = (accountRepository.findByUserId(userId));
-        return accounts.stream().map(this::convertAccountModelToAccountDtoGetResponse).collect(Collectors.toList());
+    public List<TransferResponse> getAllTransferTransactions() {
+        List<TransferTransaction> transferTransactions = (List<TransferTransaction>) transferTransactionRepository.findAll();
+        List<TransferResponse> TransferRequestlist = new ArrayList<>();
+        for (TransferTransaction transferTransaction : transferTransactions) {
+            TransferResponse transferTransactionResponse = convertTransactionModelToTransferTransactionDtoGetResponse(transferTransaction);
+            TransferRequestlist.add(transferTransactionResponse);
+        }
+        return TransferRequestlist;
+    }
 
+
+    @Override
+    public List<AccountResponse> getAccountByUserId(Integer userId) {
+        List<Account> accounts = accountRepository.findByUserId(userId);
+        return accounts.stream().map(this::convertAccountModelToAccountDtoGetResponse).collect(Collectors.toList());
     }
 
     @Override
@@ -561,8 +569,10 @@ public class UserService implements IUserService {
     }
     // Get all accounts by user ID
     public Optional<Account> getAccountsByUserId(Integer userId) {
-        return accountRepository.findByUserId(userId);
+        return accountRepository.findAccountsByUserId(userId);
     }
+
+
     public Optional<Account> getAccountByAccountNumber(String accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber);
     }
@@ -630,13 +640,25 @@ public class UserService implements IUserService {
 
 
     private TransactionResponse convertTransactionModelToTransactionDtoGetResponse(Transaction transaction) {
-        User user = userRepository.findById(transaction.getUser().getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = transaction.getUser();
 
         TransactionResponse transactionResponse = new TransactionResponse();
-        transactionResponse = TransactionResponse.builder().fullName(user.getFirstName() + ' ' + user.getLastName()).transactionType(String.valueOf(TransactionType.valueOf(transaction.getTransactionType().name()))).accountNumber(transaction.getAccountNumber()).amount(transaction.getAmount())
+        transactionResponse = TransactionResponse.builder().id(transaction.getId()).fullName(user.getFirstName() + ' ' + user.getLastName()).transactionType(String.valueOf(TransactionType.valueOf(transaction.getTransactionType().name()))).accountNumber(transaction.getAccountNumber()).amount(transaction.getAmount())
                 .transactionDateTime(transaction.getTransactionDateTime()).transactionStatus(transaction.getTransactionStatus()).build();
         return transactionResponse;
+    }
+
+    private TransferResponse convertTransactionModelToTransferTransactionDtoGetResponse(TransferTransaction transferTransaction) {
+User user=transferTransaction.getUser();
+        TransferResponse transferResponse=new TransferResponse();
+        transferResponse=TransferResponse.builder().id(transferTransaction.getId()).fullName(user.getFirstName() + ' ' + user.getLastName()).senderId(transferTransaction.getSenderId())
+                .senderAccountNumber(transferTransaction.getSenderAccountNumber())
+                .receiverId(transferTransaction.getReceiverId())
+                .receiverAccountNumber(transferTransaction.getReceiverAccountNumber())
+                .transferredAmount(transferTransaction.getTransferAmount())
+                .senderBalance(transferTransaction.getSenderBalance())
+                .receiverBalance(transferTransaction.getReceiverBalance()) .build();
+        return transferResponse;
     }
 
     private UserCredentialResponse convertUserCredentialModelToUserCredentialDtoGetResponse(UserCredential userCredential) {

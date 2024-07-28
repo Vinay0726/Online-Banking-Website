@@ -32,7 +32,7 @@ public class AccountController {
     public String getAccountsByUserId(@PathVariable Integer userId, Model model) {
         List<AccountResponse> accountResponseList = userService.getAccountByUserId(userId);
         model.addAttribute("accounts", accountResponseList);
-        return "admin/total-accounts";
+        return "/admin/total-accounts";
     }
 
 

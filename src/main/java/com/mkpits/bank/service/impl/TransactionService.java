@@ -114,52 +114,53 @@ UserCredentialRepository userCredentialRepository;
 
 
     //for credit and debit amount
-    @Transactional
-    public void processTransaction(TransactionRequest transactionRequest, String username, TransactionType transactionType) {
-        Optional<UserCredential> userCredentialOpt = userCredentialRepository.findByUserName(username);
-
-        if (userCredentialOpt.isPresent()) {
-            UserCredential userCredential = userCredentialOpt.get();
-            User user = userCredential.getUser();
-            Optional<Account> accountOpt = accountRepository.findByAccountNumber(transactionRequest.getAccountNumber());
-
-            if (accountOpt.isPresent()) {
-                Account account = accountOpt.get();
-
-                // Check if the account belongs to the logged-in user
-                if (!account.getUser().getId().equals(user.getId())) {
-                    throw new RuntimeException("Account number not valid for the logged-in user");
-                }
-
-                BigDecimal amount = BigDecimal.valueOf(transactionRequest.getAmount());
-                if (transactionType == TransactionType.Debit && account.getBalance().compareTo(amount) < 0) {
-                    throw new RuntimeException("Insufficient funds");
-                }
-
-                BigDecimal newBalance = transactionType == TransactionType.Credit
-                        ? account.getBalance().add(amount)
-                        : account.getBalance().subtract(amount);
-
-                account.setBalance(newBalance);
-                accountRepository.save(account);
-
-                Transaction transaction = new Transaction();
-                transaction.setUser(user);
-                transaction.setAccountNumber(transactionRequest.getAccountNumber());
-                transaction.setAmount(amount);
-                transaction.setTransactionDateTime(LocalDateTime.now());
-                transaction.setTransactionType(transactionType);
-                transaction.setTransactionStatus("SUCCESS");
-                transaction.setCreatedAt(LocalDateTime.now());
-                transaction.setCreatedBy(user.getId());
-                transactionRepository.save(transaction);
-            } else {
-                throw new RuntimeException("Account not found");
-            }
-        } else {
-            throw new RuntimeException("User not found");
-        }
-    }
+//    @Transactional
+//    public void processTransaction(TransactionRequest transactionRequest, String username, TransactionType transactionType) {
+//        Optional<UserCredential> userCredentialOpt = userCredentialRepository.findByUserName(username);
+//
+//        if (userCredentialOpt.isPresent()) {
+//            UserCredential userCredential = userCredentialOpt.get();
+//            User user = userCredential.getUser();
+//            Optional<Account> accountOpt = accountRepository.findByAccountNumber(transactionRequest.getAccountNumber());
+//
+//            if (accountOpt.isPresent()) {
+//                Account account = accountOpt.get();
+//
+//                // Check if the account belongs to the logged-in user
+//                if (!account.getUser().getId().equals(user.getId())) {
+//                    throw new RuntimeException("Account number not valid for the logged-in user");
+//                }
+//
+//                BigDecimal amount = BigDecimal.valueOf(transactionRequest.getAmount());
+//                if (transactionType == TransactionType.Debit && account.getBalance().compareTo(amount) < 0) {
+//                    throw new RuntimeException("Insufficient funds");
+//                }
+//
+//                BigDecimal newBalance = transactionType == TransactionType.Credit
+//                        ? account.getBalance().add(amount)
+//                        : account.getBalance().subtract(amount);
+//
+//                account.setBalance(newBalance);
+//                accountRepository.save(account);
+//
+//                Transaction transaction = new Transaction();
+//                transaction.setUser(user);
+//                transaction.setAccountNumber(transactionRequest.getAccountNumber());
+//                transaction.setAmount(amount);
+//                transaction.setTransactionDateTime(LocalDateTime.now());
+//                transaction.setTransactionType(transactionType);
+//                transaction.setTransactionStatus("SUCCESS");
+//                transaction.setCreatedAt(LocalDateTime.now());
+//                transaction.setCreatedBy(user.getId());
+//                transactionRepository.save(transaction);
+//            } else {
+//                throw new RuntimeException("Account not found");
+//            }
+//        } else {
+//            throw new RuntimeException("User not found");
+//        }
+//    }
+    
 
     public List<Transaction> getTransactionsForUser(String username) {
         Optional<UserCredential> userCredentialOpt = userCredentialRepository.findByUserName(username);
