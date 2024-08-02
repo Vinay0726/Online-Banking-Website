@@ -43,4 +43,8 @@ BigDecimal findBalanceByAccountNumber(@Param("accountNumber") String accountNumb
 long countByUserId(Integer userId);
 
     Optional<Account> findTopByUserIdOrderByAccountNumberDesc(Integer userId);
+
+//delete account by account number
+ void deleteByAccountNumber(String accNo);
+
 }

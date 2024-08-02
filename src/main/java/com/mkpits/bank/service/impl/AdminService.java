@@ -2,10 +2,12 @@ package com.mkpits.bank.service.impl;
 
 import com.mkpits.bank.dto.request.AdminRequest;
 import com.mkpits.bank.model.*;
+import com.mkpits.bank.repository.AccountRepository;
 import com.mkpits.bank.repository.AdminAddressRepository;
 import com.mkpits.bank.repository.AdminCredentialRepository;
 import com.mkpits.bank.repository.AdminRepository;
 import com.mkpits.bank.service.IAdminService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class AdminService implements IAdminService {
     @Autowired
     private AdminAddressRepository adminAddressRepository;
 
+    @Autowired
+    private AccountRepository accountRepository;
     public Admin getAdminDetailsByUsername(String username) {
         AdminCredential adminCredential = adminCredentialRepository.findByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -74,4 +78,11 @@ public class AdminService implements IAdminService {
             adminAddressRepository.save(adminAddress);
         }
     }
+
+    @Override
+    @Transactional
+    public void deleteAccountByAccountNumber(String accNo) {
+        accountRepository.deleteByAccountNumber(accNo);
+    }
+
 }

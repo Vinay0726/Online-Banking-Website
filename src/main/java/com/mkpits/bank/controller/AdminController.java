@@ -175,7 +175,12 @@ public String getAddAccount(@PathVariable Integer userId, Model model) {
     model.addAttribute("admins", admin);
     return "admin/addaccount";
 }
-
+    //Delete user by id
+    @GetMapping("/admin/deleteaccount/{accNo}")
+    public String deleteAccount(@PathVariable("accNo") String accNo){
+        adminService.deleteAccountByAccountNumber(accNo); ;
+        return "redirect:/admin/accounts";
+    }
     @PostMapping("/admin/account")
     public String addAccount(@RequestParam Integer userId, @ModelAttribute AccountRequest accountRequest, Model model) {
         try {
@@ -270,6 +275,7 @@ public String getAddAccount(@PathVariable Integer userId, Model model) {
     @GetMapping("/admin/deleteemployee/{id}")
     public String deleteEmployee(@PathVariable("id") Long id){
         employeeService.deleteEmployeeById(id) ;
-        return "redirect:admin/employees";
+        return "redirect:/admin/employees";
     }
+
 }

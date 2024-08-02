@@ -8,4 +8,6 @@ public interface IAdminService {
 
     //for update Admin data
     void updateAdminData(Long adminId, AdminRequest adminRequest);
+//delete accounts by id
+    void deleteAccountByAccountNumber(String accNo);
 }
