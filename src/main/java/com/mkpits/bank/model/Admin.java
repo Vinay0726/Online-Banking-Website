@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "admin")
 public class Admin {
@@ -36,7 +37,7 @@ public class Admin {
     private String email;
 
     @Column(name = "gender", nullable = false)
-    private char gender;
+    private String gender;
 
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;

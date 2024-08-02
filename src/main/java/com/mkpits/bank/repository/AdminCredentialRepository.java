@@ -8,4 +8,7 @@ import java.util.Optional;
 
 public interface AdminCredentialRepository extends JpaRepository<AdminCredential,Integer> {
     Optional<AdminCredential> findByUserName(String username);
+
+    Optional<AdminCredential> findByAdminId(Integer id);
 }
+

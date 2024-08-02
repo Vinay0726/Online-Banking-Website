@@ -1,14 +1,18 @@
 package com.mkpits.bank.controller;
 
+import com.mkpits.bank.dto.request.AccountRequest;
 import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.UserCredentialResponse;
 import com.mkpits.bank.dto.response.UserResponse;
 import com.mkpits.bank.model.*;
 import com.mkpits.bank.repository.*;
+import com.mkpits.bank.service.IAdminService;
 import com.mkpits.bank.service.IEmployeeService;
 import com.mkpits.bank.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,10 +51,25 @@ public class AdminController {
 
     @Autowired
     EmployeeCredentialRepository employeeCredentialRepository;
+
+    @Autowired
+    AdminRepository adminRepository;
+    @Autowired
+    AdminCredentialRepository adminCredentialRepository;
+    @Autowired
+    IAdminService adminService;
 //Register User
     @GetMapping("/admin/adduser")
     public String getRegisterUsers(Model model) {
         model.addAttribute("userForm",new UserRequest());
+
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
         return "admin/adduser";
     }
     //get all users & credentials
@@ -60,11 +79,19 @@ public class AdminController {
         List<UserCredentialResponse> userCredentialResponses = userService.getAllUsersCredentials();
         model.addAttribute("users", userResponseDtoList);
         model.addAttribute("usersCredentials", userCredentialResponses);
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
         return "admin/users";
     }
 
     @PostMapping ("/admin/adduser")
    public String registerUsers(@ModelAttribute UserRequest userRequest, Model model)  {
+
 
         try {
             UserRequest registeredUser = userService.registerUsers(userRequest);
@@ -75,6 +102,7 @@ public class AdminController {
             // You might want to add userRequest or other necessary attributes back to the model
             return "admin/adduser"; // Assuming "adduser" is your form view name
         }
+
     }
 
 
@@ -82,6 +110,14 @@ public class AdminController {
 
     @GetMapping("/admin/updateuser/{id}")
     public String getUpdateUserForm(@PathVariable("id") Long id, Model model) {
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
+
+        //for update
         Optional<User> userOptional = userRepository.findById(Math.toIntExact(id));
 
         if (userOptional.isPresent()) {
@@ -125,13 +161,46 @@ public class AdminController {
        userService.deleteUserById(id) ;
        return "redirect:/admin/users";
     }
+//for account add
+@GetMapping("/admin/addaccount/{userId}")
+public String getAddAccount(@PathVariable Integer userId, Model model) {
+    model.addAttribute("accountForm", new AccountRequest());
+    model.addAttribute("userId", userId);
 
+    //        for getting name and profile with matching by gender wise
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    // Fetching admin details using the service
+    Admin admin = adminService.getAdminDetailsByUsername(username);
+    model.addAttribute("admins", admin);
+    return "admin/addaccount";
+}
 
+    @PostMapping("/admin/account")
+    public String addAccount(@RequestParam Integer userId, @ModelAttribute AccountRequest accountRequest, Model model) {
+        try {
+            userService.addAccount(accountRequest, userId);
+            model.addAttribute("message", "Account added successfully");
+            return "redirect:/admin/accounts";
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to add account: " + e.getMessage());
+            model.addAttribute("accountForm", accountRequest);
+            model.addAttribute("userId", userId);
+            return "admin/addaccount";
+        }
+    }
 //    Register Employee
 
     @GetMapping("/admin/addemployee")
     public String getRegisterEmployees(Model model) {
         model.addAttribute("employeeRequest", new EmployeeRequest());
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
         return "admin/addemployee";
     }
 
@@ -147,6 +216,14 @@ public class AdminController {
     //    update employee
     @GetMapping("/admin/updateemployee/{id}")
     public String getUpdateForm(@PathVariable("id") Long id,Model model) {
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
+
+        //for update
         Optional<Employee> employeeOptional = employeeRepository.findById(Math.toIntExact(id));
         if (employeeOptional.isPresent()) {
             Employee employee = employeeOptional.get();

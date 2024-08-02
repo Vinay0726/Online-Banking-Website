@@ -195,32 +195,32 @@
 
                         </ul>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                            <div data-i18n="Authentications">Authentications</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Login</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/admin/auth-register-basic" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Register</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/admin/auth-forgot-password-basic" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Forgot Password</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+<!--                    <li class="menu-item">-->
+<!--                        <a href="javascript:void(0);" class="menu-link menu-toggle">-->
+<!--                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>-->
+<!--                            <div data-i18n="Authentications">Authentications</div>-->
+<!--                        </a>-->
+<!--                        <ul class="menu-sub">-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Login</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="/admin/auth-register-basic" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Register</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="/admin/auth-forgot-password-basic" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Forgot Password</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
 
 
-                    </li>
+<!--                    </li>-->
                     <!-- Misc -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                     <li class="menu-item">
@@ -240,8 +240,9 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                <nav
+                        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                        id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -251,23 +252,21 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
                         <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
 
-                            </div>
                         </div>
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
+                            <li class="nav-item lh-1 me-3">
 
+                            </li>
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img th:src="${admins.gender == 'Male' ?'../assets/img/avatars/1.png': '../img/female.png'}" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -276,12 +275,11 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt
-                                                            class="w-px-40 h-auto rounded-circle" />
+                                                        <img th:src="${admins.gender == 'Male' ?'../assets/img/avatars/1.png': '../img/female.png'}" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">Vinay Thaware</span>
+                                                    <span class="fw-semibold d-block" th:text="${admins.firstName}+''+${admins.lastName}">John Doe</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
@@ -291,26 +289,24 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="accounts-setting.html">
+                                        <a class="dropdown-item" href="/admin/accounts-setting">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
                                     </li>
-
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
+                                        <form action="/perform_logout" method="post" style="display: inline;">
+                                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bx bx-power-off me-2"></i>
+                                                <span class="align-middle">Log Out</span>
+                                            </button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -318,7 +314,6 @@
                         </ul>
                     </div>
                 </nav>
-
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
@@ -338,6 +333,9 @@
                                     </li>
 
                                 </ul>
+                                <div class="col-sm-12 col-xl-12 h-100">
+                                    <div class="alert alert-success text-center fs-4" th:if="${message}" th:text="${message}">
+                                    </div>
                                 <div class="card mb-4">
                                     <h5 class="card-header">Profile Details</h5>
                                     <!-- Account -->
@@ -350,70 +348,71 @@
                                     </div>
                                     <hr class="my-0" />
                                     <div class="card-body">
-                                        <form id="formAccountSettings" method="POST" onsubmit="return false">
+                                        <form th:action="@{/admin/updateadmin}" method="post" th:object="${adminRequest}" id="formAccountSettings" >
+                                            <input type="hidden" th:name="adminId" th:value="${adminId}" />
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="firstName" class="form-label">First Name</label>
-                                                    <input class="form-control" type="text" id="firstName" name="firstName" value="Vinay" autofocus />
+                                                    <input class="form-control" type="text" id="firstName"  th:field="*{firstName}" autofocus />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="middleName" class="form-label">Middle Name</label>
-                                                    <input class="form-control" type="text" id="middleName" name="middleName" value="M" />
+                                                    <input class="form-control" type="text" id="middleName" th:field="*{middleName}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="lastName" class="form-label">Last Name</label>
-                                                    <input class="form-control" type="text" id="lastName" name="lastName" value="Thaware" />
+                                                    <input class="form-control" type="text" id="lastName"   th:field="*{lastName}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label" for="mobileNumber">Mobile Number</label>
                                                     <div class="input-group input-group-merge">
                                                         <span class="input-group-text">Ind (+91)</span>
-                                                        <input type="text" id="mobileNumber" name="mobileNumber" class="form-control" value="9838383838" />
+                                                        <input type="text" id="mobileNumber"  th:field="*{mobileNumber}" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="email" class="form-label">E-mail</label>
-                                                    <input class="form-control" type="text" id="email" name="email" value="vinay@example.com" placeholder="Email" />
+                                                    <input class="form-control" type="text" id="email"  th:field="*{email}" placeholder="Email" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="gender" class="form-label">Gender</label>
-                                                    <input type="text" class="form-control" id="gender" name="gender" value="M" />
+                                                    <input type="text" class="form-control" id="gender"  th:field="*{gender}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label" for="dateOfBirth">Date Of Birth</label>
                                                     <div class="input-group input-group-merge">
-                                                        <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="2000-07-26" />
+                                                        <input type="date" id="dateOfBirth"  th:field="*{dateOfBirth}" class="form-control" />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label class="form-label" for="adhaarCard">Aadhar Number</label>
                                                     <div class="input-group input-group-merge">
-                                                        <input type="text" id="adhaarCard" name="adhaarCard" maxlength="12" class="form-control" value="123454321234" />
+                                                        <input type="text" id="adhaarCard"  th:field="*{adhaarCard}" maxlength="12" class="form-control"  />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="address" class="form-label">Address</label>
-                                                    <input type="text" class="form-control" id="address" name="address" placeholder="123 Main St" />
+                                                    <input type="text" class="form-control" id="address"  th:field="*{address}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="city" class="form-label">City</label>
-                                                    <input class="form-control" type="text" id="city" name="city" placeholder="Nagpur" />
+                                                    <input class="form-control" type="text" id="city"  th:field="*{city}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="state" class="form-label">State</label>
-                                                    <input class="form-control" type="text" id="state" name="state" placeholder="Maharashtra" />
+                                                    <input class="form-control" type="text" id="state"  th:field="*{state}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="pincode" class="form-label">Pin Code</label>
-                                                    <input type="text" class="form-control" id="pincode" name="pincode" placeholder="434434" maxlength="6" />
+                                                    <input type="text" class="form-control" id="pincode" th:field="*{pinCode}" maxlength="6" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="userName" class="form-label">User Name</label>
-                                                    <input class="form-control" type="text" id="userName" name="userName" placeholder="vinay12" />
+                                                    <input class="form-control" type="text" id="userName"  th:field="*{userName}" />
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="password" class="form-label">Password</label>
-                                                    <input class="form-control" type="password" id="password" name="password" placeholder="vinay2123" />
+                                                    <input class="form-control" type="text" id="password"  th:field="*{password}" />
                                                 </div>
                                                 <div class="mt-2">
                                                     <button type="submit" class="btn btn-primary me-2">Save changes</button>
@@ -458,7 +457,7 @@
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>
-                                , made with ❤️ by
+                                , made with by
                                 <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Vinay
                                     Thaware</a>
                             </div>

@@ -6,13 +6,8 @@ import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.*;
 import com.mkpits.bank.model.Transaction;
-import com.mkpits.bank.repository.EmployeeAddressRepository;
-import com.mkpits.bank.repository.EmployeeCredentialRepository;
-import com.mkpits.bank.repository.EmployeeRepository;
-import com.mkpits.bank.service.IEmployeeService;
-import com.mkpits.bank.service.IPendingTransactionService;
-import com.mkpits.bank.service.ITransactionService;
-import com.mkpits.bank.service.IUserService;
+import com.mkpits.bank.repository.*;
+import com.mkpits.bank.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,17 +39,40 @@ public class EmployeeController {
     EmployeeAddressRepository employeeAddressRepository;
     @Autowired
     EmployeeCredentialRepository employeeCredentialRepository;
+
+    @Autowired
+    AdminRepository adminRepository;
+    @Autowired
+    AdminCredentialRepository adminCredentialRepository;
+    @Autowired
+    IAdminService adminService;
     @GetMapping("/admin/employees")
     public String getEmployees(Model model) {
         List<EmployeeResponse> employeeResponseDtoList = employeeService.getAllEmployees();
         List<EmployeeCredentialResponse> employeeCredentialResponses=employeeService.getAllEmployeesCredentials();
         model.addAttribute("employees", employeeResponseDtoList);
         model.addAttribute("employeesCredentials", employeeCredentialResponses);
+
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Admin admin = adminService.getAdminDetailsByUsername(username);
+        model.addAttribute("admins", admin);
         return "admin/employees";
     }
 
     @GetMapping("/employee/dashboard")
     public  String getDashboard(Model model) throws JsonProcessingException {
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee);
+
         //total users
         long totalUser=userService.getTotalUsers();
         //total accounts
@@ -92,6 +110,13 @@ public class EmployeeController {
         List<UserCredentialResponse> userCredentialResponses = userService.getAllUsersCredentials();
         model.addAttribute("users", userResponseDtoList);
         model.addAttribute("usersCredentials", userCredentialResponses);
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee);
         return "employee/users";
     }
 
@@ -100,6 +125,13 @@ public class EmployeeController {
 
         List<AccountResponse> accountList= userService.getAllAccounts();
         model.addAttribute("accounts",accountList);
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee);
         return "employee/accounts";
     }
 //    @GetMapping("/employee/cdrequest")
@@ -109,6 +141,13 @@ public class EmployeeController {
 @GetMapping("/employee/cdrequest")
 public String viewPendingRequests(Model model) {
     model.addAttribute("pendingRequests", pendingTransactionService.getAllPendingRequests());
+
+    //        for getting name and profile with matching by gender wise
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    // Fetching admin details using the service
+    Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+    model.addAttribute("employees", employee);
     return "employee/credit-debit-request";
 }
 
@@ -141,10 +180,18 @@ public String viewPendingRequests(Model model) {
     }
     @GetMapping("/employee/transactions")
     public  String getAllTransactions(Model model){
+
         List<TransactionResponse> transactionResponseList=userService.getAllTransactions();
         List<TransferResponse> transferResponseList=userService.getAllTransferTransactions();
         model.addAttribute("transactions",transactionResponseList);
         model.addAttribute("transfer",transferResponseList);
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee);
         return "employee/transactions";
     }
 
@@ -152,9 +199,18 @@ public String viewPendingRequests(Model model) {
     public  String getProfileSetting(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
+
+        // Fetching admin details using the service
+        Employee employee1 = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee1);
         EmployeeCredential employeeCredential1 = employeeCredentialRepository.findByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
         Integer userId = employeeCredential1.getEmployeeId();
+
+
+
+
         Optional<Employee> employeeOptional = employeeRepository.findById(Math.toIntExact(userId));
         if (employeeOptional.isPresent()) {
             Employee employee = employeeOptional.get();
@@ -202,7 +258,14 @@ public String viewPendingRequests(Model model) {
     }
 
     @GetMapping("/employee/error")
-    public  String get404Error(){
+    public  String get404Error(Model model){
+
+        //        for getting name and profile with matching by gender wise
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Fetching admin details using the service
+        Employee employee = employeeService.getEmployeeDetailsByUsername(username);
+        model.addAttribute("employees", employee);
         return "employee/404";
     }
 

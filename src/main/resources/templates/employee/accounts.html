@@ -59,11 +59,11 @@
                     <div class="position-relative">
                         <img class="rounded-circle" src="../img/user.jpg" alt="" style="width: 40px; height: 40px;">
                         <div
-                            class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                                class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                         </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Vinay Thaware</h6>
+                        <h6 class="mb-0"  th:text="${employees.firstName}+' '+${employees.lastName}">xyz</h6>
                         <span>Employee</span>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             </a>
                         </div>
                     </div>
-        
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                             <i class="fa fa-paper-plane me-2 fs-5"></i>
@@ -96,17 +96,17 @@
                                 <i class="fa fa-credit-card me-2 fs-5 "></i>
                                 <span class="fw-bold">Credit / Debit</span>
                             </a>
-                            <a href="/employee/transferrequest" class="dropdown-item d-flex align-items-center py-2">
-                                <i class="fa fa-exchange-alt me-2 fs-5"></i>
-                                <span class="fw-bold">Transfer</span>
-                            </a>
+                            <!--                        <a href="/employee/transferrequest" class="dropdown-item d-flex align-items-center py-2">-->
+                            <!--                            <i class="fa fa-exchange-alt me-2 fs-5"></i>-->
+                            <!--                            <span class="fw-bold">Transfer</span>-->
+                            <!--                        </a>-->
                         </div>
                     </div>
-        
+
                     <a href="/employee/transactions" class="nav-item nav-link">
                         <i class="fa fa-history me-2"></i>Transactions
                     </a>
-        
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-cog me-2"></i>Setting
@@ -121,9 +121,9 @@
                                 <span class="fw-bold">404 Error</span>
                             </a>
                         </div>
-        
+
                     </div>
-        
+
                 </div>
             </nav>
         </div>
@@ -143,13 +143,16 @@
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="../img/user.jpg" alt=""
+                            <img class="rounded-circle me-lg-2" th:src="${employees.gender == 'Male' ?'../img/user.jpg': '../img/female.png'}"  alt=""
                                  style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Vinay Thaware</span>
+                            <span class="d-none d-lg-inline-flex"  th:text="${employees.firstName}+' '+${employees.lastName}">xyz</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="profile-setting.html" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="/employee/profile" class="dropdown-item">My Profile</a>
+                            <form action="/perform_logout" method="post" style="display: inline;">
+                                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

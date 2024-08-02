@@ -83,7 +83,7 @@ public class UserController {
         //for user name
         Optional<User> userOptional= userRepository.findById(userId);
         User user= userOptional.get();
-        user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).build();
+        user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).gender(user.getGender()).build();
         model.addAttribute("users", user);
 
 
@@ -125,10 +125,10 @@ public class UserController {
         Integer userId = userCredential.getUserId();
         List<AccountResponse> accounts = userService.getAccountDetailsByUserId(userId);
         model.addAttribute("accounts", accounts);
-
+        //getting user details
         Optional<User> userOptional= userRepository.findById(userId);
         User user= userOptional.get();
-        user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).build();
+        user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).gender(user.getGender()).build();
         model.addAttribute("users", user);
         // Set default account to the first one
 
@@ -165,11 +165,12 @@ public class UserController {
         Integer userId = userCredential.getUserId();
         List<AccountResponse> accounts = userService.getAccountDetailsByUserId(userId);
         model.addAttribute("accounts", accounts);
-
+       //for getting user data
        Optional<User> userOptional= userRepository.findById(userId);
        User user= userOptional.get();
-       user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).cin(user.getCin()).build();
+       user=User.builder().firstName(user.getFirstName()).lastName(user.getLastName()).cin(user.getCin()).gender(user.getGender()).build();
        model.addAttribute("users", user);
+
         BigDecimal totalCredit = transactionService.getTotalCreditByUserId(userId);
         BigDecimal totalDebit = transactionService.getTotalDebitByUserId(userId);
         int totalTransactions = transactionService.getTotalTransactionsByUserId(userId);
@@ -196,6 +197,14 @@ public class UserController {
         UserCredential userCredential1 = userCredentialRepository.findByUserName(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Integer userId = userCredential1.getUserId();
+
+        //for getting user data name and gender
+        Optional<User> userOptional1= userRepository.findById(userId);
+        User user1= userOptional1.get();
+        user1=User.builder().firstName(user1.getFirstName()).lastName(user1.getLastName()).cin(user1.getCin()).gender(user1.getGender()).build();
+        model.addAttribute("users", user1);
+
+
         Optional<User> userOptional = userRepository.findById(Math.toIntExact(userId));
 
         if (userOptional.isPresent()) {
@@ -236,12 +245,39 @@ public class UserController {
     @GetMapping("/user/credit")
     public String getCreditRequestForm(Model model) {
         model.addAttribute("transactionRequest", new TransactionRequest());
+
+        //for getting id who user login
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        UserCredential userCredential1 = userCredentialRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Integer userId = userCredential1.getUserId();
+
+        //for getting user data name and gender
+        Optional<User> userOptional1= userRepository.findById(userId);
+        User user1= userOptional1.get();
+        user1=User.builder().firstName(user1.getFirstName()).lastName(user1.getLastName()).cin(user1.getCin()).gender(user1.getGender()).build();
+        model.addAttribute("users", user1);
         return "user/credit";
     }
 
     @GetMapping("/user/debit")
     public String getDebitRequestForm(Model model) {
         model.addAttribute("transactionRequest", new TransactionRequest());
+
+
+        //for getting id who user login
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        UserCredential userCredential1 = userCredentialRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Integer userId = userCredential1.getUserId();
+
+        //for getting user data name and gender
+        Optional<User> userOptional1= userRepository.findById(userId);
+        User user1= userOptional1.get();
+        user1=User.builder().firstName(user1.getFirstName()).lastName(user1.getLastName()).cin(user1.getCin()).gender(user1.getGender()).build();
+        model.addAttribute("users", user1);
         return "user/debit";
     }
 
@@ -276,6 +312,19 @@ public class UserController {
     @GetMapping("/user/transfer")
     public String getTransferForm(Model model) {
         model.addAttribute("transferRequest", new TransferRequest());
+
+        //for getting id who user login
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        UserCredential userCredential1 = userCredentialRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Integer userId = userCredential1.getUserId();
+
+        //for getting user data name and gender
+        Optional<User> userOptional1= userRepository.findById(userId);
+        User user1= userOptional1.get();
+        user1=User.builder().firstName(user1.getFirstName()).lastName(user1.getLastName()).cin(user1.getCin()).gender(user1.getGender()).build();
+        model.addAttribute("users", user1);
         return "user/transfer";
     }
 
@@ -317,6 +366,17 @@ public class UserController {
         if (message != null) {
             model.addAttribute("message", message);
         }
+
+        //for getting data name and gender
+        UserCredential userCredential1 = userCredentialRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        Integer userId = userCredential1.getUserId();
+
+        //for getting user data name and gender
+        Optional<User> userOptional1= userRepository.findById(userId);
+        User user1= userOptional1.get();
+        user1=User.builder().firstName(user1.getFirstName()).lastName(user1.getLastName()).cin(user1.getCin()).gender(user1.getGender()).build();
+        model.addAttribute("users", user1);
 
         return "user/transaction"; // This should match the Thymeleaf template name
     }

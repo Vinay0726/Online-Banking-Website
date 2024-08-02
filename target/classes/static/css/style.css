@@ -13,7 +13,7 @@
     body {
       font-family: sans-serif, "Poppins";
       background-color: #fff;
-      height: 100%;
+      height: 100vh;
       width: 100%;
 
     }
@@ -44,9 +44,9 @@
     }
 
     nav img {
-      width: 15%;
-      height: 65px;
-      margin-left: 18px;
+      width: 120px;
+      height: 100%;
+      margin-left: 48px;
     }
 
     nav ul {
@@ -60,6 +60,8 @@
 
     nav ul li a {
       text-decoration: none;
+      color: #0b0b0b;
+
     }
 
     nav #logintogglebtn {
@@ -75,6 +77,10 @@
       border-radius: 30px;
       margin-left: 40px;
     }
+    nav #navtoggle{
+    display: none;
+     }
+
 
     section {
       width: 100%;
@@ -88,7 +94,7 @@
     section .box1 {
       width: 40%;
       height: 100%;
-      margin-top: 6%;
+     margin-left: 3rem;
 
 
     }
@@ -318,7 +324,7 @@
       height: 70%;
       border: 1px solid blanchedalmond;
       border-radius: 10px;
-      margin-left: 20px;
+      margin-left: 15px;
       display: flex;
       gap: 20px;
 
@@ -350,20 +356,211 @@
       color: rgb(121, 116, 116);
       margin-top: 10px;
     }
-
-    .formbox {
+ .about{
       width: 100%;
-      height: 100%;
-      position: fixed;
-      z-index: 3;
-      top: 0;
-      left: 0;
-      background-color: transparent;
-      backdrop-filter: blur(5px);
+      height: 100vh;
+     text-align: center;
+      gap: 2rem;
+    }
+    .about h1{
+      font-size: 4rem;
+     padding: 1.5rem;
+
+    }
+  .about  .aboutbox{
+      width: 100%;
+      height: 80vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 2rem;
+      margin-top: -3rem;
+
     }
+     .aboutbox .box1{
+     height: 60%;
+     width: 30%;
+     border: 1px solid rgb(15, 4, 4);
+     }
+
+     .aboutbox .box1 img{
+      height: 100%;
+      width: 80%;
+     }
+      .aboutbox .box2{
+     height: 85%;
+     width: 40%;
+     border: 1px solid rgb(17, 5, 5);
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-top: 3rem;
+
+     }
+
+       .aboutbox .box2 p{
+        font-size: 0.9rem;
+        width: 90%;
+        text-align: left;
+        word-spacing: 0.2rem;
+        letter-spacing: 0.1rem;
+        margin-top: 1.5rem;
+       }
+       .aboutbox .box2 h5{
+        font-size: 1.2rem;
+        padding: 1rem;
+       }
+
+       .aboutbox .box2  span{
+        font-size: 1rem;
+         padding: 1rem;
+         font-weight: 600;
+       }
+
+        .aboutbox .box2  ul{
+        list-style-type: square;
+        border: 1px solid black;
+        width: 80%;
+        text-align: left;
+        padding: 0.3rem;
+        list-style: none;
+        }
+         .aboutbox .box2  ul li{
+          padding: 0.1rem;
+          font-size: 0.8rem;
+         }
+
+         .contactus{
+          width: 100%;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+         }
+          .contactus section{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .contactus section .sec1{
+            width:60%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* flex-direction: column;
+            align-items: end; */
+            gap: 2rem;
+
+          }
+           .contactus section .sec1 h2{
+            width: 50%;
+            padding: 0.5rem;
+           font-size: 2.5rem;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+
+           }
+            .contactus section .sec1 .form{
+              height: 75%;
+              width: 55%;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+
+             .contactus section .sec1 .form h3{
+              font-size: 1.5rem;
+             }
+             .contactus section .sec1 .form form{
+              width: 100%;
+              height: 90%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 1rem;
+             }
+             .contactus section .sec1 .form form input{
+              border-radius: 5px;
+              border: 1px solid rgba(128, 128, 128, 0.73);
+              width: 70%;
+              height: 10%;
+              padding: 1rem;
+             }
+             .contactus section .sec1 .form form textarea{
+               border-radius: 5px;
+              border: 1px solid rgba(128, 128, 128, 0.73);
+              width: 70%;
+              height: 25%;
+               padding: 0.8rem;
+               font-size: 1rem;
+
+             }
+             .contactus section .sec1 .form form textarea::placeholder{
+              color: rgb(190, 187, 187);
+              font-weight: 100;
+              font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+             }
+             .contactus section .sec1 .form form button{
+              width: 70%;
+              height: 10%;
+               border-radius: 2rem;
+               border: none;
+               background-color: #0b0b0b;
+               color: #fff;
+
+             }
+           .contactus section .sec2{
+            width: 40%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+          }
+          .contactus section .sec2 img{
+            width: 70%;
+            height: 70%;
+          }
+          .contactus footer{
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+           .contactus footer .connect{
+            width: 30%;
+            height: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+           }
+          .contactus footer  p{
+            font-size: 0.8rem;
+            margin-left: 1rem;
+          }
+
+
+       .formbox {
+       width: 100%;
+       height: 100%;
+       position: fixed;
+       z-index: 3;
+       top: 0;
+       left: 0;
+       background-color: transparent;
+       backdrop-filter: blur(5px);
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       }
 
     .formbox.active {
       display: none;
@@ -388,14 +585,14 @@
     }
 
     .login-form form {
-      margin-top: 5px;
+      margin-top: -35px;
       height: 85%;
       width: 100%;
 
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
       flex-direction: column;
     }
 
@@ -417,7 +614,7 @@
       border-radius: 20px;
       outline: none;
       padding: 10px;
-      border: 1px solid grey;
+      border: 1px solid rgb(128, 128, 128);
     }
 
     .login-form form input ::placeholder {
@@ -453,7 +650,7 @@
       margin-top: 80px;
       width: 30%;
       height: 90%;
-       background-color: rgba(255, 255, 255, 0.479);
+      background-color: rgba(255, 255, 255, 0.479);
       backdrop-filter: blur(20px);
       border-radius: 10px;
       position: absolute;
@@ -583,4 +780,906 @@
       cursor: pointer;
       font-size: 16px;
       margin-left: 3px;
+    }
+
+
+  /* for tablet */
+    @media (max-width: 768px) {
+.container{
+      width: 100%;
+
+    }
+    nav{
+      width: 100vw;
+    }
+     nav img{
+      height: 70%;
+      width: 80px;
+      margin-left: 0;
+
+     }
+
+     nav ul{
+      position:absolute;
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      top: 100%;
+      right: -100%;
+      width: 100vw;
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(15, 1, 1, 0.896);
+
+     transition: right 0.3s ease-in-out
+     }
+     nav ul.active {
+      right: 0;
+     }
+      nav ul li{
+
+        padding: 2rem;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+      }
+       nav ul li:hover{
+      border: 1px solid #4deeea;
+
+
+       }
+     nav ul li a{
+      color: #fff;
+       text-decoration: none;
+     }
+ nav ul li a:hover{
+  color: #6eeb83;
+ }
+nav #logintogglebtn{
+  background-color: rgb(12, 12, 12);
+  backdrop-filter: blur(1rem);
+  color: white;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: 60px;
+ font-weight: bold;
+
+}
+ nav #navtoggle{
+  display: block;
+  font-size: 50px;
+  background-color: transparent;
+  border: none;
+  margin-right: 35px;
+ }
+
+ section .box1{
+  margin-top: 50%;
+  margin-left: -1rem;
+ }
+  section .box2 {
+      width: 40%;
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -30%;
+      margin-left: 20%;
+
+    }
+
+    section .box2 img {
+      height: 80%;
+
+    }
+
+    section .box1 .top p {
+      font-size: 12px;
+      width: 35%;
+      margin-left: 20px;
+      text-align: center;
+    }
+
+
+    .middle h3 {
+      font-size: 90px;
+      margin-top: 10px;
+    }
+
+    .middle h2 {
+      font-size: 130px;
+      font-family: "Roboto Slab";
+      font-weight: 400;
+      color: black;
+      margin-top: 10px;
+    }
+
+    .middle h1 {
+      font-size: 80px;
+      margin-top: 10px;
+    }
+
+    .middle a {
+      margin-top: 30px;
+    }
+    .bottom {
+      height: 15%;
+      width: 100vw;
+      margin-left: 10%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      margin-top: -60px;
+
+    }
+
+    .bottom .reviews {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 120px;
+      gap: 10px;
+
+    }
+
+    .bottom .reviews .img img {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+    }
+
+    .bottom .reviews span {
+      font-size: 10px;
+    }
+
+    .bottom .user {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .user h3 {
+      font-size: 25px;
+    }
+
+    .bottom .user p {
+      font-size: 10px;
+    }
+
+    .bottom .transaction {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .transaction h3 {
+      font-size: 25px;
+    }
+
+    .bottom .transaction p {
+      font-size: 10px;
+    }
+
+    .features h1 {
+      font-size: 40px;
+    }
+
+    .fe {
+      width: 100%;
+      height: 85%;
+
+    }
+
+    .febox {
+      width: 85%;
+      height: 90%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .febox .transfer {
+      width: 65vw;
+      height: 25%;
+      margin-top: 10px;
+      margin-left: 10px;
+
+
+
+    }
+
+    .febox .transfer img {
+      height: 50px;
+      width: 50px;
+
+    }
+
+
+
+    .febox .transfer div h2 {
+      font-size: 30px;
+
+    }
+
+    .febox .transfer div p {
+      font-size: 22px;
+
+    }
+    .about  .aboutbox{
+      width: 100%;
+      height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: -3rem;
+
+    }
+     .aboutbox .box1{
+     height: 40%;
+     width:40%;
+     }
+
+    .aboutbox .box2{
+                height: 75%;
+                width: 85%;
+                border: 1px solid rgb(17, 5, 5);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: -3%;
+         }
+
+       .aboutbox .box2 p{
+        font-size: 1rem;
+       }
+       .aboutbox .box2 h5{
+        font-size: 1.4rem;
+       }
+
+       .aboutbox .box2  span{
+        font-size: 1.4rem;
+       }
+
+        .aboutbox .box2  ul{
+        list-style-type: square;
+        border: 1px solid black;
+        width: 80%;
+        text-align: left;
+        padding: 0.3rem;
+        list-style: none;
+        }
+         .aboutbox .box2  ul li{
+          padding: 0.1rem;
+          font-size: 1.2rem;
+         }
+
+         .contactus{
+          width: 100%;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+         }
+          .contactus section{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .contactus section .sec1{
+            width:60%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* flex-direction: column;
+            align-items: end; */
+            gap: 2rem;
+
+          }
+           .contactus section .sec1 h2{
+            width: 30%;
+            padding: 0.5rem;
+           font-size: 2rem;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+
+           }
+            .contactus section .sec1 .form{
+              height: 55%;
+              width: 85%;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+
+             .contactus section .sec1 .form h3{
+              font-size: 1.5rem;
+             }
+             .contactus section .sec1 .form form{
+              width: 100%;
+              height: 90%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 1rem;
+             }
+
+
+           .contactus section .sec2{
+            width: 30%;
+            height: 40%;
+            margin-right: -3rem;
+          }
+          .contactus section .sec2 img{
+            width: 100%;
+            height: 70%;
+          }
+    .login-form {
+      width: 60%;
+      height: 45%;
+    margin-left: -10px;
+
+    }
+    .login-form form {
+    margin-top: -20px;
+    }
+
+   /* create account */
+    .create-form {
+      display: none;
+      margin-top: 50px;
+      width: 90%;
+      height: 70%;
+      margin-left: -15px;
+
+    }
+
+    .create-form form .name input {
+      margin-top: -10px;
+    }
+
+
+    .create-form form .dategenderbox label {
+      font-size: 12px;
+    }
+
+    .create-form form .dategenderbox select {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .dategenderbox input {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .address {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      gap: 5px;
+
+    }
+
+    .create-form form .address input {
+      width: 35%;
+      height: 30px;
+      border: 1px solid grey;
+      margin-top: 15px;
+
+
+    }
+
+    .create-form form input {
+      width: 85%;
+      height: 30px;
+      margin: 10px auto;
+      border-radius: 20px;
+      outline: none;
+      border: 1px solid grey;
+      padding: 10px;
+    }
+
+    .create-form form button {
+      width: 30%;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 20px;
+      border: none;
+      background-color: black;
+      color: white;
+    }
+
+    .create-form form p {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .create-form form p span {
+      color: #4CAF50;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 3px;
+    }
+
+    }
+    /* for mobile */
+    @media (max-width: 480px) {
+
+    .container{
+      width: 100%;
+
+    }
+    nav{
+      width: 100vw;
+    }
+     nav img{
+      height: 70%;
+      width: 80px;
+      margin-left: 0;
+
+     }
+
+     nav ul{
+      position:absolute;
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      top: 100%;
+      right: -100%;
+      width: 100vw;
+      color: white;
+      font-size: 2rem;
+      background-color: rgba(15, 1, 1, 0.896);
+
+     transition: right 0.3s ease-in-out
+     }
+     nav ul.active {
+      right: 0;
+     }
+      nav ul li{
+
+        padding: 2rem;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+      }
+       nav ul li:hover{
+      border: 1px solid #4deeea;
+
+
+       }
+     nav ul li a{
+      color: #fff;
+       text-decoration: none;
+     }
+ nav ul li a:hover{
+  color: #6eeb83;
+ }
+nav #logintogglebtn{
+  background-color: rgb(12, 12, 12);
+  backdrop-filter: blur(1rem);
+  color: white;
+  border: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: -3px;
+ font-weight: bold;
+
+}
+ nav #navtoggle{
+  display: block;
+  font-size: 50px;
+  background-color: transparent;
+  border: none;
+  margin-right: 35px;
+ }
+
+ section .box1{
+  margin-top: 50%;
+ }
+  section .box2 {
+      width: 40%;
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -90%;
+      margin-left: 20%;
+
+    }
+
+    section .box2 img {
+      height: 40%;
+
+    }
+
+    section .box1 .top p {
+      font-size: 12px;
+      width: 35%;
+      margin-left: 20px;
+      text-align: center;
+    }
+
+
+    .middle h3 {
+      font-size: 70px;
+      margin-top: 10px;
+    }
+
+    .middle h2 {
+      font-size: 80px;
+      font-family: "Roboto Slab";
+      font-weight: 400;
+      color: black;
+      margin-top: 10px;
+    }
+
+    .middle h1 {
+      font-size: 80px;
+      margin-top: 10px;
+    }
+
+    .middle a {
+      margin-top: 30px;
+    }
+    .bottom {
+      height: 15%;
+      width: 100vw;
+      margin-left: 10%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 20px;
+      margin-top: -60px;
+
+    }
+
+    .bottom .reviews {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 120px;
+      gap: 10px;
+
+    }
+
+    .bottom .reviews .img img {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+    }
+
+    .bottom .reviews span {
+      font-size: 10px;
+    }
+
+    .bottom .user {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .user h3 {
+      font-size: 25px;
+    }
+
+    .bottom .user p {
+      font-size: 10px;
+    }
+
+    .bottom .transaction {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      height: 80%;
+      width: 150px;
+      gap: 10px;
+    }
+
+    .bottom .transaction h3 {
+      font-size: 25px;
+    }
+
+    .bottom .transaction p {
+      font-size: 10px;
+    }
+
+    .features h1 {
+      font-size: 40px;
+    }
+
+    .fe {
+      width: 100%;
+      height: 85%;
+
+    }
+
+    .febox {
+      width: 85%;
+      height: 90%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    .febox .transfer {
+      width: 65vw;
+      height: 25%;
+      margin-top: 10px;
+      margin-left: 10px;
+
+
+
+    }
+
+    .febox .transfer img {
+      height: 50px;
+      width: 50px;
+
+    }
+
+
+
+    .febox .transfer div h2 {
+      font-size: 20px;
+
+    }
+
+    .febox .transfer div p {
+      font-size: 16px;
+
+    }
+    .login-form {
+      width: 80%;
+      height: 45%;
+    margin-left: -10px;
+
+    }
+    .login-form form {
+    margin-top: -20px;
+    }
+
+   /* create account */
+    .create-form {
+      display: none;
+      margin-top: 50px;
+      width: 90%;
+      height: 70%;
+      margin-left: -15px;
+
+    }
+
+    .create-form form .name input {
+      margin-top: -10px;
+    }
+
+
+    .create-form form .dategenderbox label {
+      font-size: 12px;
+    }
+
+    .create-form form .dategenderbox select {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .dategenderbox input {
+      width: 38%;
+      height: 30px;
+      border: 1px solid grey;
+    }
+
+    .create-form form .address {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85%;
+      gap: 5px;
+
+    }
+
+    .create-form form .address input {
+      width: 35%;
+      height: 30px;
+      border: 1px solid grey;
+      margin-top: 15px;
+
+
+    }
+
+    .create-form form input {
+      width: 85%;
+      height: 30px;
+      margin: 10px auto;
+      border-radius: 20px;
+      outline: none;
+      border: 1px solid grey;
+      padding: 10px;
+    }
+
+    .create-form form button {
+      width: 30%;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 20px;
+      border: none;
+      background-color: black;
+      color: white;
+    }
+
+    .create-form form p {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .create-form form p span {
+      color: #4CAF50;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 3px;
+    }
+
+
+  .about  .aboutbox{
+      flex-direction: column;
+
+    }
+     .aboutbox .box1{
+     height: 50%;
+     width: 60%;
+     margin-top: 20%;
+     }
+
+     .aboutbox .box1 img{
+      height: 100%;
+      width: 80%;
+     }
+      .aboutbox .box2{
+            height: 75%;
+            width: 85%;
+            border: 1px solid rgb(17, 5, 5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -3%;
+     }
+ .aboutbox .box2 p{
+        font-size: 0.8rem;
+        width: 90%;
+        text-align: left;
+        word-spacing: 0.2rem;
+        letter-spacing: 0.1rem;
+        margin-top: 1rem;
+       }
+       .aboutbox .box2 h5{
+        font-size: 1rem;
+        padding: 0.5rem;
+
+       }
+
+       .aboutbox .box2  span{
+        font-size: 0.9rem;
+         padding: 0.5rem;
+         font-weight: 600;
+       }
+
+        .aboutbox .box2  ul{
+        list-style-type: square;
+        border: 1px solid black;
+        width: 90%;
+        text-align: left;
+        padding: 0.3rem;
+        list-style: none;
+        }
+         .aboutbox .box2  ul li{
+          padding: 0.1rem;
+          font-size: 0.8rem;
+         }
+
+
+
+         .contactus{
+          width: 100%;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+         }
+          .contactus section{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .contactus section .sec1{
+
+            flex-direction: column;
+            height: 50%;
+            justify-content: space-between;
+            margin-top: -4rem;
+
+
+          }
+           .contactus section .sec1 h2{
+            width: 100%;
+            font-size: 3rem;
+           }
+            .contactus section .sec1 .form{
+              height: 60%;
+              width: 80%;
+              margin-top: 6rem;
+              position: absolute;
+              background-color: transparent;
+              backdrop-filter: blur(0.1rem);
+
+            }
+
+             .contactus section .sec1 .form h3{
+              font-size: 1.5rem;
+             }
+             .contactus section .sec1 .form form{
+              width: 100%;
+              height: 90%;
+
+             }
+           .contactus section .sec2{
+            width: 60%;
+            height: 40%;
+            display: flex;
+            align-items: center;
+            margin-right: -3rem;
+            margin-left: 8rem;
+
+
+          }
+          .contactus section .sec2 img{
+            width: 100%;
+            height: 80%;
+
+          }
+
+
     }

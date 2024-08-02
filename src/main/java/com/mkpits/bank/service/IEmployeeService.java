@@ -4,6 +4,7 @@ import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.response.EmployeeAddressResponse;
 import com.mkpits.bank.dto.response.EmployeeCredentialResponse;
 import com.mkpits.bank.dto.response.EmployeeResponse;
+import com.mkpits.bank.model.Employee;
 
 import java.util.List;
 
@@ -22,5 +23,6 @@ public interface IEmployeeService {
     //Update Employee
     void updateEmployeeData(Long employeeId, EmployeeRequest employeeRequest);
 
-
+//for getting name gender
+    Employee getEmployeeDetailsByUsername(String username);
 }

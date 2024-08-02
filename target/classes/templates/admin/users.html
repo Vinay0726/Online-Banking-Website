@@ -197,32 +197,32 @@
 
                         </ul>
                     </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                            <div data-i18n="Authentications">Authentications</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Login</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/admin/auth-register-basic" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Register</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="/admin/auth-forgot-password-basic" class="menu-link" target="_blank">
-                                    <div data-i18n="Basic">Forgot Password</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+<!--                    <li class="menu-item">-->
+<!--                        <a href="javascript:void(0);" class="menu-link menu-toggle">-->
+<!--                            <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>-->
+<!--                            <div data-i18n="Authentications">Authentications</div>-->
+<!--                        </a>-->
+<!--                        <ul class="menu-sub">-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Login</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="/admin/auth-register-basic" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Register</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="menu-item">-->
+<!--                                <a href="/admin/auth-forgot-password-basic" class="menu-link" target="_blank">-->
+<!--                                    <div data-i18n="Basic">Forgot Password</div>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
 
 
-                    </li>
+<!--                    </li>-->
                     <!-- Misc -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                     <li class="menu-item">
@@ -239,8 +239,9 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                <nav
+                        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                        id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -262,11 +263,9 @@
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
-                                            class="w-px-40 h-auto rounded-circle" />
+                                        <img th:src="${admins.gender == 'Male' ?'../assets/img/avatars/1.png': '../img/female.png'}" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -275,12 +274,11 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt
-                                                            class="w-px-40 h-auto rounded-circle" />
+                                                        <img th:src="${admins.gender == 'Male' ?'../assets/img/avatars/1.png': '../img/female.png'}" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">Vinay Thaware</span>
+                                                    <span class="fw-semibold d-block" th:text="${admins.firstName}+''+${admins.lastName}">John Doe</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
@@ -290,15 +288,9 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/admin/accounts-setting.html">
+                                        <a class="dropdown-item" href="/admin/accounts-setting">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
                                     <li>
@@ -307,10 +299,13 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/admin/auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
+                                        <form action="/perform_logout" method="post" style="display: inline;">
+                                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bx bx-power-off me-2"></i>
+                                                <span class="align-middle">Log Out</span>
+                                            </button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -318,7 +313,6 @@
                         </ul>
                     </div>
                 </nav>
-
                 <!-- / Navbar -->
 
 
@@ -413,7 +407,7 @@
                                                 <th>Created at</th>
                                                 <th>Updated at</th>
                                                 <th>Status</th>
-                                                <th>Actions</th>
+<!--                                                <th>Actions</th>-->
 
                                             </tr>
                                         </thead>
@@ -427,20 +421,20 @@
                                                 <td th:text="${userCredential.createdAt}"></td>
                                                 <td th:text="${userCredential.updatedAt}"></td>
                                                 <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                            data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);" ><i
-                                                                    class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
+<!--                                                <td>-->
+<!--                                                    <div class="dropdown">-->
+<!--                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"-->
+<!--                                                            data-bs-toggle="dropdown">-->
+<!--                                                            <i class="bx bx-dots-vertical-rounded"></i>-->
+<!--                                                        </button>-->
+<!--                                                        <div class="dropdown-menu">-->
+<!--                                                            <a class="dropdown-item" href="javascript:void(0);"><i-->
+<!--                                                                    class="bx bx-edit-alt me-1"></i> Edit</a>-->
+<!--                                                            <a class="dropdown-item" href="javascript:void(0);" ><i-->
+<!--                                                                    class="bx bx-trash me-1"></i> Delete</a>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </td>-->
                                             </tr>
 
                                         </tbody>
@@ -461,8 +455,8 @@
                                         <script>
                                             document.write(new Date().getFullYear());
                                         </script>
-                                        , made with ❤️ by
-                                        <a href="https://themeselection.com" target="_blank"
+                                        , made with  by
+                                        <a href="#"
                                             class="footer-link fw-bolder">Vinay
                                             Thaware</a>
                                     </div>

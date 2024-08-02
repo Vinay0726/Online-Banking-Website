@@ -4,9 +4,7 @@ import com.mkpits.bank.dto.request.EmployeeRequest;
 import com.mkpits.bank.dto.response.EmployeeAddressResponse;
 import com.mkpits.bank.dto.response.EmployeeCredentialResponse;
 import com.mkpits.bank.dto.response.EmployeeResponse;
-import com.mkpits.bank.model.Employee;
-import com.mkpits.bank.model.EmployeeAddress;
-import com.mkpits.bank.model.EmployeeCredential;
+import com.mkpits.bank.model.*;
 import com.mkpits.bank.repository.EmployeeAddressRepository;
 import com.mkpits.bank.repository.EmployeeCredentialRepository;
 import com.mkpits.bank.repository.EmployeeRepository;
@@ -115,7 +113,23 @@ public class EmployeeService implements IEmployeeService {
         }
 
     }
-        @Override
+
+    @Override
+    public Employee getEmployeeDetailsByUsername(String username) {
+        EmployeeCredential employeeCredential = employeeCredentialRepository.findByUserName(username)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        Integer employeeId = employeeCredential.getEmployeeId();
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+        return Employee.builder()
+                .firstName(employee.getFirstName())
+                .lastName(employee.getLastName())
+                .gender(employee.getGender())
+                .build();
+    }
+
+    @Override
     public EmployeeRequest registerEmployees(EmployeeRequest employeeRequest) {
        Employee employee=new Employee();
        employee.setFirstName(employeeRequest.getFirstName());

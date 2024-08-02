@@ -1,5 +1,6 @@
 package com.mkpits.bank.service.impl;
 
+import com.mkpits.bank.dto.request.AccountRequest;
 import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.*;
@@ -194,6 +195,53 @@ TransferTransactionRepository transferTransactionRepository;
         addressRepository.save(userAddress);
         return userRequest;
     }
+
+//    add account
+public AccountRequest addAccount(AccountRequest accountRequest, Integer userId) {
+    User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+
+    Account account = new Account();
+    account.setUserId(user.getId());
+    account.setAccountNumber(newAccountNumber(userId)); // Implement this method to generate a unique account number
+    account.setAccountType(accountRequest.getAccountType());
+    account.setBalance(accountRequest.getBalance());
+
+    // Set the rate of interest based on the account type
+    account.setRateOfInterest(calculateRateOfInterest(account.getAccountType()));
+    account.setBranchId("EB124256");
+    account.setOpeningDate(LocalDate.now());
+    account.setClosingDate(LocalDate.now().plusYears(50));
+    account.setCreatedAt(LocalDateTime.now());
+    account.setCreatedBy(user.getId()); // Replace with actual user ID
+    account.setUpdatedAt(LocalDateTime.now());
+    account.setUpdatedBy(user.getId()); // Replace with actual user ID
+
+    accountRepository.save(account);
+
+    return accountRequest;
+}
+    private String newAccountNumber(Integer userId) {
+        Optional<Account> optionalAccount = accountRepository.findTopByUserIdOrderByAccountNumberDesc(userId);
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            String oldAccountNumber = account.getAccountNumber();
+            try {
+                long numericPart = Long.parseLong(oldAccountNumber); // Use Long for larger numbers
+                long newAccountNumberLong = numericPart + 1; // Increment the numeric part
+                String newAccountNumber = String.format("%012d", newAccountNumberLong); // Format back to a 12-digit string
+                System.out.println("New Account Number: " + newAccountNumber); // Log the account number
+                return newAccountNumber;
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Error parsing account number", e);
+            }
+        } else {
+            String defaultAccountNumber = "000000000001"; // Default account number for new users
+            System.out.println("Default Account Number: " + defaultAccountNumber); // Log the account number
+            return defaultAccountNumber;
+        }
+    }
+
+
 
     @Override
     public void updateUserData(Long userId, UserRequest userRequest) {
@@ -577,6 +625,8 @@ TransferTransactionRepository transferTransactionRepository;
         return accountRepository.findByAccountNumber(accountNumber);
     }
 
+
+
     //    get daily user in chart graph
     @Override
     public List<Map<String, Object>> getDailyUserData() {
@@ -677,7 +727,7 @@ User user=transferTransaction.getUser();
     private AccountResponse convertAccountModelToAccountDtoGetResponse(Account account) {
         AccountResponse accountResponse = new AccountResponse();
         User user = account.getUser();
-        accountResponse = AccountResponse.builder().id(account.getId()).name(user.getFirstName() + ' ' + user.getLastName())
+        accountResponse = AccountResponse.builder().id(account.getId()).userId(account.getUserId()).name(user.getFirstName() + ' ' + user.getLastName())
                 .accountType(account.getAccountType()).balance(account.getBalance()).accountNumber(account.getAccountNumber())
                 .rateOfInterest(account.getRateOfInterest()).branchId(account.getBranchId()).openingDate(account.getOpeningDate()).closingDate(account.getClosingDate()).build();
         return accountResponse;

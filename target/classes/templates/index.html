@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home Page</title>
+  <!-- for icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="" th:href="@{css/style.css}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -13,219 +15,275 @@
 </head>
 
 <body id="home">
-  <div class="container">
-    <nav>
-      <img src="images/logo1.png"  alt="logo not found">
-      <ul>
-        <li> <a href="#home" >HOME</a></li>
-        <li><a href="#features">FEATURES</a></li>
-        <li>CONTACT</li>
-        <li>ABOUT US</li>
-      </ul>
-      </img>
-      <button id="logintogglebtn">Log In</button>
-    </nav>
-    <div class="formbox active">
+<div class="container">
+  <nav>
+    <img src="images/logo1.png" alt="logo not found">
+    <ul class="navul">
+      <li> <a href="#home">HOME</a></li>
+      <li><a href="#features">FEATURES</a></li>
+      <li><a href="#aboutus">ABOUT US</a></li>
+      <li><a href="#contact">CONTACT</a></li>
 
-      <div class="login-form">
+    </ul>
+    </img>
+    <button id="logintogglebtn">Log In</button>
+    <button id="navtoggle"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+  <div class="formbox active">
 
-        <h1>Login</h1>
-        <div class="card-footer text-center">
-          <p th:if="${param.error}" class="text-danger">Invalid username or password</p>
-          <p th:if="${param.logout}" class="text-success">You have been logged out</p>
-        </div>
-        <form th:action="@{/perform_login}" method="post">
-         
-          <input type="text"  name="username" placeholder="Username">
-          <input type="password" placeholder="Password" name="password">
-          <button type="submit">Login</button>
-          <p>Not have any account <span id="createBtn">Create Account</span></p>
-        </form>
+    <div class="login-form">
 
+      <h1>Login</h1>
+      <div class="card-footer text-center">
+        <p th:if="${param.error}" class="text-danger">Invalid username or password</p>
+        <p th:if="${param.logout}" class="text-success">You have been logged out</p>
       </div>
-      <div class="create-form">
+      <form th:action="@{/perform_login}" method="post">
 
-        <h1>Create Account</h1>
-        <form action="" method="get">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" placeholder="Password" name="password">
+        <button type="submit">Login</button>
+<!--        <p>Not have any account <span id="createBtn">Create Account</span></p>-->
+      </form>
 
-          <div class="name">
-            <input type="text" placeholder="First Name">
-            <input type="text" placeholder="Middle Name">
-            <input type="text" placeholder="Middle Name">
-          </div>
-         
-          <div class="dategenderbox">
-            <label for="">Date of Birth</label>
-            <input type="date"><select name="" id="">
-              <option value="">Select Gender</option>
-              <option value="">Male</option>
-              <option value="">Female</option>
-              <option value="">Others</option>
+    </div>
+    <div class="create-form">
+
+      <h1>Create Account</h1>
+      <form action="" method="get">
+
+        <div class="name">
+          <input type="text" placeholder="First Name">
+          <input type="text" placeholder="Middle Name">
+          <input type="text" placeholder="Middle Name">
+        </div>
+        <div class="dategenderbox">
+          <label for="">Date of Birth</label>
+          <input type="date"><select name="" id="">
+          <option value="">Select Gender</option>
+          <option value="">Male</option>
+          <option value="">Female</option>
+          <option value="">Others</option>
 
 
-            </select>
-          </div>
-          <input type="number" placeholder="Mobile">
-          <input type="number" placeholder="Aadhar">
+        </select>
+        </div>
+        <input type="number" placeholder="Mobile">
+        <input type="number" placeholder="Aadhar">
 
-          <div class="address">
-            <select id="state" onchange="populateCities()">
-              <option value="" disabled selected>Select State</option>
-              <option value="maharashtra">Maharashtra</option>
-              <option value="gujarat">Gujarat</option>
-              <option value="karnataka">Karnataka</option>
-              <option value="tamilnadu">Tamil Nadu</option>
-              <option value="rajasthan">Rajasthan</option>
-              <option value="punjab">Punjab</option>
-              <option value="kerala">Kerala</option>
-              <option value="uttarpradesh">Uttar Pradesh</option>
-              <option value="madhyapradesh">Madhya Pradesh</option>
-              <option value="westbengal">West Bengal</option>
-            </select>
+        <div class="address">
+          <select id="state" onchange="populateCities()">
+            <option value="" disabled selected>Select State</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="tamilnadu">Tamil Nadu</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="punjab">Punjab</option>
+            <option value="kerala">Kerala</option>
+            <option value="uttarpradesh">Uttar Pradesh</option>
+            <option value="madhyapradesh">Madhya Pradesh</option>
+            <option value="westbengal">West Bengal</option>
+          </select>
 
-            <select id="city">
-              <option value="" disabled selected>Select City</option>
-            </select>
-            <input type="text" placeholder="Pincode">
-          </div>
+          <select id="city">
+            <option value="" disabled selected>Select City</option>
+          </select>
+          <input type="text" placeholder="Pincode">
+        </div>
 
-          <input type="text" placeholder="Address">
+        <input type="text" placeholder="Address">
 
-          <input type="text" placeholder="User Name">
-          <input type="email" placeholder="Email">
-          <input type="password" placeholder="Password">
+        <input type="text" placeholder="User Name">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
 
-          <button type="submit">Create</button>
-          <p>Already have an account <span id="loginBtn">Sign in</span></p>
-        </form>
+        <button type="submit">Create</button>
+        <p>Already have an account <span id="loginBtn">Sign in</span></p>
+      </form>
 
+    </div>
+  </div>
+  <section>
+    <div class="box1">
+      <div class="top">
+        <h1>+</h1>
+        <div class="line"></div>
+        <p>Banking Platform</p>
+      </div>
+      <div class="middle">
+        <h3>Online</h3>
+        <h2>Banking</h2>
+        <h1>Platform</h1> <a href="">Get Started</a>
+      </div>
+      <div class="bottom">
+        <div class="reviews">
+          <div class="img"><img src="images/profile.png" alt=""><img src="images/profile.png" alt=""></div> <span>OVER 10k+
+              reviews</span>
+        </div>
+        <div class="user">
+          <h3>175+</h3>
+          <p>Users use this Website</p>
+        </div>
+        <div class="transaction">
+          <h3>1000+</h3>
+          <p>Daily Transaction</p>
+        </div>
       </div>
     </div>
-    <section>
-      <div class="box1">
-        <div class="top">
-          <h1>+</h1>
-          <div class="line"></div>
-          <p>Banking Platform</p>
-        </div>
-        <div class="middle">
-          <h3>Online</h3>
-          <h2>Banking</h2>
-          <h1>Platform</h1> <a href="">Get Started</a>
-        </div>
-        <div class="bottom">
-          <div class="reviews">
-            <div class="img"><img src="images/profile.png" alt=""><img src="images/profile.png" alt=""></div> <span>OVER
-              10k+
-              reviews</span>
-          </div>
-          <div class="user">
-            <h3>175+</h3>
-            <p>Users use this Website</p>
-          </div>
-          <div class="transaction">
-            <h3>1000+</h3>
-            <p>Daily Transaction</p>
-          </div>
-        </div>
-      </div>
-      <div class="box2">
-        <img src="images/bankingimg1.png" alt="">
-      </div>
-    </section>
+    <div class="box2">
+      <img src="images/bankingimg1.png" alt="">
+    </div>
+  </section>
 
-    <div class="features" id="features">
-      <h1>Features</h1>
-      <div class="fe">
-        <div class="febox">
-          <div class="transfer"><img src="images/moneytransfer.png" alt="">
-            <div>
-              <h2>Transfer Money</h2>
-              <p>You can transfer money anywhere and anytime easily from the real time rates.</p>
-            </div>
+  <div class="features" id="features">
+    <h1>Features</h1>
+    <div class="fe">
+      <div class="febox">
+        <div class="transfer"><img src="images/moneytransfer.png" alt="">
+          <div>
+            <h2>Transfer Money</h2>
+            <p>You can transfer money anywhere and anytime easily from the real time rates.</p>
           </div>
-          <div class="transfer"><img src="images/moneytransfer.png" alt="">
-            <div>
-              <h2>Safe Transfer</h2>
-              <p>Transfer between account are very safe.This is really unlimited between.</p>
-            </div>
+        </div>
+        <div class="transfer"><img src="images/moneytransfer.png" alt="">
+          <div>
+            <h2>Safe Transfer</h2>
+            <p>Transfer between account are very safe.This is really unlimited between.</p>
           </div>
-          <div class="transfer"><img src="images/moneytransfer.png" alt="">
-            <div>
-              <h2>Real Partnership</h2>
-              <p>Access expert advice support from decated team of payment specialist.</p>
-            </div>
+        </div>
+        <div class="transfer"><img src="images/moneytransfer.png" alt="">
+          <div>
+            <h2>Real Partnership</h2>
+            <p>Access expert advice support from decated team of payment specialist.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script>
-    const createBtn = document.getElementById("createBtn");
-    createBtn.addEventListener("click", () => {
-      document.querySelector(".login-form").style.display = "none";
-      document.querySelector(".create-form").style.display = "block";
 
-    });
+  <div class="about" id="aboutus">
+    <h1>About Us</h1>
+    <div class="aboutbox">
+      <div class="box1"> <img src="images/aboutus.png" alt=""></div>
+      <div class="box2"> <p>Welcome to EasyBank, your trusted partner in online banking. Our platform is designed to offer you seamless and
+        secure financial services right at your fingertips. With a commitment to innovation and customer satisfaction, we
+        provide a range of features to cater to your banking needs.</p>
+        <h5 >Our Key Services</h5>
+        <span >Credit Services</span>
+        <ul>
+          <li>Easy application and approval process for personal and business loans.</li>
+          <li>Manage your credit accounts online with detailed statements and payment reminders.</li>
+        </ul>
+        <span  >Debit Services</span>
+        <ul>
+          <li>Secure and convenient access to your funds.</li>
+          <li>Detailed transaction history and real-time balance updates.</li>
+        </ul>
+        <span  >Fund Transfer</span>
+        <ul>
+          <li>Fast and secure transfer of funds between accounts.</li>
+          <li>Track transfer status and receive confirmation alerts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    const loginBtn = document.getElementById("loginBtn");
-    loginBtn.addEventListener("click", () => {
-      document.querySelector(".login-form").style.display = "block";
-      document.querySelector(".create-form").style.display = "none";
-
-    });
-
-    const loginToggleBtn = document.getElementById("logintogglebtn");
-    loginToggleBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-      document.querySelector(".formbox").classList.toggle("active");
-
-      // Toggle no-scroll class based on form visibility
-      if (document.querySelector(".formbox").classList.contains("active")) {
-
-        document.body.classList.remove("no-scroll");
-      } else {
-        document.body.classList.add("no-scroll");
-      }
-    });
+  <div class="contactus" id="contact">
+    <section><div class="sec1"><h2>Contact Us</h2>
+      <div class="form">
+        <h3>Send Us Message</h3>
+        <form action="">
+          <input type="text" name="name" placeholder="Your Name">
+          <input type="email" name="email" placeholder="Your Email">
+          <textarea name="" rows="6" id="" placeholder="massage here"></textarea>
+          <button type="submit">Submit Message Here</button>
+        </form>
+      </div></div><div class="sec2"><img src="images/contactus.png" alt=""></div></section>
+    <hr style="width: 100%;color: rgba(128, 128, 128, 0.515);">
+    <footer>
+      <p>@2024 Copyright by EasyBank.All rights reserved</p>
+      <div class="connect"><i class="fa-brands fa-facebook"></i><i class="fa-brands fa-twitter"></i><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-google"></i></div>
+    </footer>
+  </div>
+</div>
 
 
-  </script>
+<!-- for nav bar toggle -->
+<script>
+  let nav=document.getElementById("navtoggle");
 
-  <!-- dropdown state and address -->
-  <script>
-    const stateCityMap = {
-      "maharashtra": ["Mumbai", "Pune", "Nagpur"],
-      "gujarat": ["Ahmedabad", "Surat", "Vadodara"],
-      "karnataka": ["Bengaluru", "Mysuru", "Mangaluru"],
-      "tamilnadu": ["Chennai", "Coimbatore", "Madurai"],
-      "rajasthan": ["Jaipur", "Udaipur", "Jodhpur"],
-      "punjab": ["Amritsar", "Ludhiana", "Chandigarh"],
-      "kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
-      "uttarpradesh": ["Lucknow", "Kanpur", "Varanasi"],
-      "madhyapradesh": ["Bhopal", "Indore", "Gwalior"],
-      "westbengal": ["Kolkata", "Howrah", "Durgapur"]
-    };
+  nav.addEventListener("click",()=>{
+    event.preventDefault();
+    document.querySelector(".navul").classList.toggle("active");
+  })
+</script>
+<script>
+<!--  const createBtn = document.getElementById("createBtn");-->
+<!--  createBtn.addEventListener("click", () => {-->
+<!--    document.querySelector(".login-form").style.display = "none";-->
+<!--    document.querySelector(".create-form").style.display = "block";-->
 
-    function populateCities() {
-      const stateSelect = document.getElementById("state");
-      const citySelect = document.getElementById("city");
-      const selectedState = stateSelect.value;
+<!--  });-->
 
-      // Clear previous city options
-      citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+  const loginBtn = document.getElementById("loginBtn");
+  loginBtn.addEventListener("click", () => {
+    document.querySelector(".login-form").style.display = "block";
+    document.querySelector(".create-form").style.display = "none";
 
-      // Populate cities based on selected state
-      if (selectedState && stateCityMap[selectedState]) {
-        stateCityMap[selectedState].forEach(city => {
-          const option = document.createElement("option");
-          option.value = city.toLowerCase();
-          option.text = city;
-          citySelect.add(option);
-        });
-      }
+  });
+
+  const loginToggleBtn = document.getElementById("logintogglebtn");
+  loginToggleBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    document.querySelector(".formbox").classList.toggle("active");
+
+    // Toggle no-scroll class based on form visibility
+    if (document.querySelector(".formbox").classList.contains("active")) {
+
+      document.body.classList.remove("no-scroll");
+    } else {
+      document.body.classList.add("no-scroll");
     }
-  </script>
+  });
+
+
+</script>
+
+<!-- dropdown state and address -->
+<script>
+  const stateCityMap = {
+    "maharashtra": ["Mumbai", "Pune", "Nagpur"],
+    "gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+    "karnataka": ["Bengaluru", "Mysuru", "Mangaluru"],
+    "tamilnadu": ["Chennai", "Coimbatore", "Madurai"],
+    "rajasthan": ["Jaipur", "Udaipur", "Jodhpur"],
+    "punjab": ["Amritsar", "Ludhiana", "Chandigarh"],
+    "kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+    "uttarpradesh": ["Lucknow", "Kanpur", "Varanasi"],
+    "madhyapradesh": ["Bhopal", "Indore", "Gwalior"],
+    "westbengal": ["Kolkata", "Howrah", "Durgapur"]
+  };
+
+  function populateCities() {
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
+    const selectedState = stateSelect.value;
+
+    // Clear previous city options
+    citySelect.innerHTML = '<option value="" disabled selected>Select City</option>';
+
+    // Populate cities based on selected state
+    if (selectedState && stateCityMap[selectedState]) {
+      stateCityMap[selectedState].forEach(city => {
+        const option = document.createElement("option");
+        option.value = city.toLowerCase();
+        option.text = city;
+        citySelect.add(option);
+      });
+    }
+  }
+</script>
 </body>
 
 </html>

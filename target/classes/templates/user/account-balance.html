@@ -99,14 +99,18 @@
 
 
                             <li class="nav-item dropdown d-lg-flex d-none">
-                                <button type="button" class="btn btn-inverse-primary btn-sm">Settings</button>
+                                <form action="/perform_logout" method="post" style="display: inline;">
+                                    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                                    <button type="submit" class="btn btn-inverse-primary btn-sm">Logout</button>
+                                </form>
+
                             </li>
                             <li class="nav-item nav-profile dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                                     id="profileDropdown">
-                                    <span class="nav-profile-name">Vinay</span>
+                                    <span class="nav-profile-name" th:text="${users.firstName}+''+${users.lastName}">xyz</span>
                                     <span class="online-status"></span>
-                                    <img src="../images/profile.png" alt="profile" />
+                                    <img th:src="${users.gender == 'Male' ?'../assets/img/avatars/1.png': '../img/female.png'}" alt="profile" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                     aria-labelledby="profileDropdown">

@@ -1,6 +1,7 @@
 package com.mkpits.bank.service;
 
 
+import com.mkpits.bank.dto.request.AccountRequest;
 import com.mkpits.bank.dto.request.UserRequest;
 import com.mkpits.bank.dto.response.*;
 import com.mkpits.bank.model.Account;
@@ -67,6 +68,9 @@ public List<AccountResponse> getAccountByUserId(Integer userId);
     BigDecimal getTotalBalanceByUserId(Integer userId);
 
     Optional<Account> getAccountByAccountNumber(String accountNumber);
+
+    //for add account
+    AccountRequest addAccount(AccountRequest accountRequest,Integer userId);
 
 //    Optional<Account> getAccountsByUserId(Integer userId);
 

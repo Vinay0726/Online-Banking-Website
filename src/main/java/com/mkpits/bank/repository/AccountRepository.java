@@ -41,4 +41,6 @@ BigDecimal findBalanceByAccountNumber(@Param("accountNumber") String accountNumb
 
 //
 long countByUserId(Integer userId);
+
+    Optional<Account> findTopByUserIdOrderByAccountNumberDesc(Integer userId);
 }
