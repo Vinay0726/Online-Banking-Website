@@ -1588,7 +1588,7 @@ nav #logintogglebtn{
       width: 80%;
      }
       .aboutbox .box2{
-            height: 70%;
+            height: 80%;
             width: 90%;
             border: 1px solid rgb(17, 5, 5);
             display: flex;
@@ -1638,7 +1638,7 @@ nav #logintogglebtn{
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          margin-top: 60%;
+          margin-top: 100%;
          }
           .contactus section{
             width: 100%;
@@ -1653,13 +1653,13 @@ nav #logintogglebtn{
             flex-direction: column;
             height: 50%;
             justify-content: space-between;
-            margin-top: -4rem;
+           
 
 
           }
            .contactus section .sec1 h2{
             width: 100%;
-            font-size: 3rem;
+            font-size: 2rem;
            }
             .contactus section .sec1 .form{
               height: 60%;
