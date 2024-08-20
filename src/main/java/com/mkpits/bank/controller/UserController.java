@@ -239,7 +239,7 @@ public class UserController {
     public String updateUser(@ModelAttribute UserRequest userRequest, Model model) {
         userService.updateUserData(userRequest.getUserId(), userRequest);
         model.addAttribute("message", "Profile updated successfully");
-        return "/user/profile-setting";
+        return "redirect:/user/profile-setting";
     }
 
     @GetMapping("/user/credit")
@@ -287,10 +287,10 @@ public class UserController {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             pendingTransactionService.createPendingRequest(transactionRequest, username, TransactionType.Credit);
             model.addAttribute("message", "Credit request submitted for approval!");
-            return "user/transaction";
+            return "redirect:/user/transaction";
         } catch (Exception e) {
             model.addAttribute("message", "Credit request failed: " + e.getMessage());
-            return "user/transaction";
+            return "redirect:/user/transaction";
         }
     }
 
@@ -300,10 +300,10 @@ public class UserController {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             pendingTransactionService.createPendingRequest(transactionRequest, username, TransactionType.Debit);
             model.addAttribute("message", "Debit request submitted for approval!");
-            return "user/transaction";
+            return "redirect:/user/transaction";
         } catch (Exception e) {
             model.addAttribute("message", "Debit request failed: " + e.getMessage());
-            return "user/transaction";
+            return "redirect:/user/transaction";
         }
     }
 
@@ -342,11 +342,11 @@ public class UserController {
                 return "redirect:/user/transaction";
             } else {
                 model.addAttribute("message", "User not found");
-                return "user/transaction";
+                return "redirect:/user/transaction";
             }
         } catch (Exception e) {
             model.addAttribute("message", "Transfer failed: " + e.getMessage());
-            return "user/transfer";
+            return "redirect:/user/transfer";
 
         }
 

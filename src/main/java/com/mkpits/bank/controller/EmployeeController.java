@@ -159,7 +159,7 @@ public String viewPendingRequests(Model model) {
         } catch (Exception e) {
             model.addAttribute("message", "Failed to approve request: " + e.getMessage());
         }
-        return "employee/credit-debit-request";
+        return "redirect:/employee/credit-debit-request";
     }
 
     @PostMapping("/employee/rejectRequest")
@@ -170,7 +170,7 @@ public String viewPendingRequests(Model model) {
         } catch (Exception e) {
             model.addAttribute("message", "Failed to reject request: " + e.getMessage());
         }
-        return "employee/credit-debit-request";
+        return "redirect:/employee/credit-debit-request";
     }
 
 
@@ -254,7 +254,7 @@ public String viewPendingRequests(Model model) {
         employeeService.updateEmployeeData(Long.valueOf(employeeId),employeeRequest);
 
         model.addAttribute("message", "Employee updated successfully");
-        return "employee/profile-setting";
+        return "redirect:/employee/profile-setting";
     }
 
     @GetMapping("/employee/error")
