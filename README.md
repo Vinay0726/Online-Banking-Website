@@ -2,13 +2,13 @@
 
 User
 
-login Id :- Vinay12
-Password :- Vinay@123
+login Id :- User
+Password :- User@123
 
 
 Employee
-login Id :- Vinay12
-Password :- Vinay@1234
+login Id :- Employee
+Password :- Employee@123
 
 
 Admin
