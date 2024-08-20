@@ -254,7 +254,7 @@ public String viewPendingRequests(Model model) {
         employeeService.updateEmployeeData(Long.valueOf(employeeId),employeeRequest);
 
         model.addAttribute("message", "Employee updated successfully");
-        return "redirect:/employee/profile-setting";
+        return "redirect:/employee/profile";
     }
 
     @GetMapping("/employee/error")

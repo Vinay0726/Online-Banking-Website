@@ -239,7 +239,7 @@ public class UserController {
     public String updateUser(@ModelAttribute UserRequest userRequest, Model model) {
         userService.updateUserData(userRequest.getUserId(), userRequest);
         model.addAttribute("message", "Profile updated successfully");
-        return "redirect:/user/profile-setting";
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/user/credit")
