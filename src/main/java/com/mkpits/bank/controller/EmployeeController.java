@@ -159,7 +159,7 @@ public String viewPendingRequests(Model model) {
         } catch (Exception e) {
             model.addAttribute("message", "Failed to approve request: " + e.getMessage());
         }
-        return "redirect:/employee/credit-debit-request";
+        return "redirect:/employee/transactions";
     }
 
     @PostMapping("/employee/rejectRequest")
@@ -170,7 +170,7 @@ public String viewPendingRequests(Model model) {
         } catch (Exception e) {
             model.addAttribute("message", "Failed to reject request: " + e.getMessage());
         }
-        return "redirect:/employee/credit-debit-request";
+        return "redirect:/employee/transactions";
     }
 
 

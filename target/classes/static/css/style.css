@@ -1360,14 +1360,14 @@ nav #logintogglebtn{
       margin-top: 30px;
     }
     .bottom {
-      height: 15%;
+      height: 20%;
       width: 100vw;
       margin-left: 10%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 20px;
-      margin-top: -60px;
+      margin-top: 10px;
 
     }
 
@@ -1428,6 +1428,10 @@ nav #logintogglebtn{
       font-size: 10px;
     }
 
+    .features{
+      width: 100%;
+      height: 100vh;
+    }
     .features h1 {
       font-size: 40px;
     }
@@ -1439,8 +1443,8 @@ nav #logintogglebtn{
     }
 
     .febox {
-      width: 85%;
-      height: 90%;
+      width: 90%;
+      height: 100%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -1448,8 +1452,8 @@ nav #logintogglebtn{
     }
 
     .febox .transfer {
-      width: 65vw;
-      height: 25%;
+      width: 90%;
+      height: 28%;
       margin-top: 10px;
       margin-left: 10px;
 
@@ -1471,7 +1475,7 @@ nav #logintogglebtn{
     }
 
     .febox .transfer div p {
-      font-size: 16px;
+      font-size: 14px;
 
     }
     .login-form {
@@ -1569,10 +1573,12 @@ nav #logintogglebtn{
 
   .about  .aboutbox{
       flex-direction: column;
+      width: 100%;
+      height: 120vh;
 
     }
      .aboutbox .box1{
-     height: 50%;
+     height: 30%;
      width: 60%;
      margin-top: 20%;
      }
@@ -1582,8 +1588,8 @@ nav #logintogglebtn{
       width: 80%;
      }
       .aboutbox .box2{
-            height: 75%;
-            width: 85%;
+            height: 80%;
+            width: 90%;
             border: 1px solid rgb(17, 5, 5);
             display: flex;
             flex-direction: column;
@@ -1632,6 +1638,7 @@ nav #logintogglebtn{
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          margin-top: 100%;
          }
           .contactus section{
             width: 100%;
@@ -1646,13 +1653,13 @@ nav #logintogglebtn{
             flex-direction: column;
             height: 50%;
             justify-content: space-between;
-            margin-top: -4rem;
+           
 
 
           }
            .contactus section .sec1 h2{
             width: 100%;
-            font-size: 3rem;
+            font-size: 2rem;
            }
             .contactus section .sec1 .form{
               height: 60%;
